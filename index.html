@@ -1,0 +1,2227 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הִתְקָרְבוּת 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Secular+One&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink: #FFD6E8;
+            --pink-dark: #FFB6D1;
+            --pink-light: #FFF0F6;
+            --mint: #D4F5E9;
+            --mint-dark: #A8E6CF;
+            --mint-light: #E8FBF3;
+            --gold: #FFF0B3;
+            --gold-dark: #FFE066;
+            --lavender: #E8E0F0;
+            --lavender-dark: #D4C4E3;
+            --peach: #FFE5D9;
+            --peach-dark: #FFCAB8;
+            --sky: #D6EEFF;
+            --sky-dark: #B3DBFF;
+            --white: #FFFFFF;
+            --gray-light: #F8F8F8;
+            --gray: #B0B0B0;
+            --text: #5A5A5A;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: var(--pink-light);
+            min-height: 100vh;
+            color: var(--text);
+        }
+
+        .hearts-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .floating-heart {
+            position: absolute;
+            opacity: 0.1;
+            animation: floatHeart 15s infinite ease-in-out;
+        }
+
+        @keyframes floatHeart {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.1; }
+            90% { opacity: 0.1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        .app-container {
+            max-width: 600px;
+            margin: 20px auto 0;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+            padding-bottom: 100px;
+        }
+
+        .header {
+            background: var(--pink);
+            padding: 20px 20px 20px;
+            text-align: center;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(255, 214, 232, 0.4);
+            position: relative;
+            margin: 0 15px;
+        }
+
+        .header h1 {
+            font-family: 'Secular One', sans-serif;
+            color: white;
+            font-size: 1.7em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            letter-spacing: 3px;
+        }
+
+        .header-subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .header-bsd {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: rgba(255,255,255,0.9);
+            font-size: 0.8em;
+        }
+
+        .progress-section {
+            background: white;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(255, 214, 232, 0.3);
+        }
+
+        .day-counter { text-align: center; margin-bottom: 15px; }
+
+        .day-number {
+            font-family: 'Secular One', sans-serif;
+            font-size: 3em;
+            color: var(--pink-dark);
+            line-height: 1;
+        }
+
+        .day-label { color: var(--gray); font-size: 0.9em; }
+
+        .progress-bar-container {
+            background: var(--gray-light);
+            border-radius: 15px;
+            height: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--pink) 0%, var(--pink-dark) 50%, var(--gold) 100%);
+            border-radius: 15px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 10px;
+            color: var(--gray);
+            font-size: 0.85em;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 8px;
+            padding: 0 15px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .nav-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-tab {
+            background: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 25px;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.85em;
+            font-weight: 500;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .nav-tab:hover { transform: translateY(-2px); }
+
+        .nav-tab.active {
+            background: var(--pink);
+            color: white;
+        }
+
+        .content-section {
+            display: none;
+            padding: 0 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .content-section.active { display: block; }
+
+        .content-wrapper {
+            max-height: calc(100vh - 180px);
+            overflow-y: auto;
+            padding-bottom: 100px;
+            margin-top: 15px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 20px rgba(255, 214, 232, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(255, 214, 232, 0.35);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .card-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4em;
+        }
+
+        .card-icon.pink { background: var(--pink-light); }
+        .card-icon.mint { background: var(--mint-light); }
+        .card-icon.gold { background: rgba(255, 215, 0, 0.2); }
+
+        .card-title { font-weight: 600; font-size: 1.1em; }
+        .card-subtitle { font-size: 0.85em; color: var(--gray); }
+
+        .mission-card {
+            background: linear-gradient(135deg, var(--pink-light) 0%, var(--mint-light) 100%);
+            border: 2px solid var(--pink);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-card::before {
+            content: '💕';
+            position: absolute;
+            top: -20px; right: -20px;
+            font-size: 80px;
+            opacity: 0.1;
+        }
+
+        .mission-content {
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+
+        .mission-tip {
+            background: white;
+            border-radius: 12px;
+            padding: 12px 15px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: var(--gray);
+            border-right: 3px solid var(--gold);
+        }
+
+        .complete-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--mint-dark);
+            border: none;
+            border-radius: 15px;
+            color: white;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .complete-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(77, 182, 172, 0.4);
+        }
+
+        .complete-btn.completed {
+            background: var(--gold-dark);
+        }
+
+        .messages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .message-time-card {
+            background: white;
+            border-radius: 15px;
+            padding: 15px 10px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(255, 214, 232, 0.25);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .message-time-card:hover { transform: scale(1.05); }
+
+        .message-time-card.active {
+            background: var(--pink);
+            color: white;
+        }
+
+        .message-time-icon { font-size: 1.8em; margin-bottom: 5px; }
+        .message-time-label { font-size: 0.85em; font-weight: 500; }
+
+        .message-suggestions {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(255, 214, 232, 0.25);
+        }
+
+        .message-suggestion {
+            background: var(--gray-light);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .message-suggestion:hover { background: var(--pink-light); }
+
+        .notes-textarea {
+            width: 100%;
+            border: 2px solid var(--gray-light);
+            border-radius: 15px;
+            padding: 15px;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1em;
+            resize: none;
+            height: 100px;
+            transition: border-color 0.3s ease;
+        }
+
+        .notes-textarea:focus {
+            outline: none;
+            border-color: var(--pink);
+        }
+
+        .add-note-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--pink);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .add-note-btn:hover { transform: scale(1.02); }
+
+        .note-card {
+            background: var(--peach);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 15px rgba(255, 224, 102, 0.2);
+            transform: rotate(-1deg);
+            transition: all 0.3s ease;
+        }
+
+        .note-card:nth-child(even) { transform: rotate(1deg); }
+        .note-card:hover { transform: rotate(0deg) scale(1.02); }
+
+        .note-text { font-size: 1em; line-height: 1.6; margin-bottom: 10px; }
+
+        .note-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8em;
+            color: var(--gray);
+        }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #EF5350;
+            cursor: pointer;
+            font-size: 1.2em;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .delete-btn:hover { opacity: 1; }
+
+        .challenge-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 20px rgba(212, 245, 233, 0.4);
+            border-right: 4px solid var(--mint-dark);
+        }
+
+        .challenge-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .challenge-badge {
+            background: var(--mint-light);
+            color: var(--mint-dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 500;
+        }
+
+        .challenge-badge.weekly {
+            background: rgba(255, 215, 0, 0.2);
+            color: var(--gold-dark);
+        }
+
+        .challenge-badge.tiktok {
+            background: var(--pink-light);
+            color: var(--pink-dark);
+        }
+
+        .challenge-title { font-size: 1.1em; font-weight: 600; margin-bottom: 8px; }
+        .challenge-desc { color: var(--gray); font-size: 0.95em; line-height: 1.6; }
+
+        .movie-card {
+            background: linear-gradient(135deg, var(--lavender) 0%, var(--sky) 100%);
+            border-radius: 20px;
+            padding: 25px;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .movie-week {
+            background: var(--pink);
+            color: var(--text);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .movie-title {
+            font-family: 'Secular One', sans-serif;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .movie-why { opacity: 0.8; font-size: 0.95em; margin-bottom: 15px; line-height: 1.6; color: var(--text); }
+
+        .movie-task {
+            background: rgba(255,255,255,0.6);
+            border-radius: 12px;
+            padding: 15px;
+            border-right: 3px solid var(--pink-dark);
+        }
+
+        .movie-task-label { font-size: 0.8em; opacity: 0.7; margin-bottom: 5px; color: var(--text); }
+
+        .movie-questions {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(232, 224, 240, 0.4);
+        }
+
+        .question-item {
+            background: var(--lavender);
+            border-radius: 12px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+
+        .date-idea-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 20px rgba(255, 214, 232, 0.25);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .date-idea-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .date-idea-category {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .date-idea-category.romantic { background: var(--pink-light); color: #D4849A; }
+        .date-idea-category.adventure { background: var(--mint-light); color: #7EBDA5; }
+        .date-idea-category.home { background: var(--gold); color: #C9A227; }
+        .date-idea-category.fun { background: var(--sky); color: #7AADD4; }
+
+        .date-idea-title { font-weight: 600; font-size: 1.1em; margin-bottom: 8px; }
+        .date-idea-desc { color: var(--gray); font-size: 0.9em; line-height: 1.5; }
+
+        .journal-card {
+            background: linear-gradient(135deg, var(--peach) 0%, var(--pink-light) 100%);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(255, 182, 209, 0.15);
+        }
+
+        .journal-date { font-size: 0.85em; color: var(--gray); margin-bottom: 10px; }
+        .journal-prompt { font-weight: 600; font-size: 1.1em; margin-bottom: 15px; }
+
+        .journal-textarea {
+            width: 100%;
+            border: none;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            padding: 15px;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1em;
+            resize: none;
+            height: 120px;
+            line-height: 1.6;
+        }
+
+        .journal-textarea:focus { outline: none; background: white; }
+
+        .save-journal-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--pink-light);
+            border: none;
+            border-radius: 12px;
+            color: var(--text);
+            font-family: 'Heebo', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .save-journal-btn:hover { background: var(--pink); }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(255, 214, 232, 0.25);
+        }
+
+        .stat-icon { font-size: 2em; margin-bottom: 10px; }
+
+        .stat-number {
+            font-family: 'Secular One', sans-serif;
+            font-size: 2em;
+            color: var(--pink-dark);
+        }
+
+        .stat-label { font-size: 0.85em; color: var(--gray); }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: white;
+            padding: 10px 20px 25px;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            padding: 5px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active { color: var(--pink-dark); }
+        .nav-item-icon { font-size: 1.5em; }
+        .nav-item-label { font-size: 0.7em; font-weight: 500; }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-overlay.show { display: flex; }
+
+        .modal {
+            background: white;
+            border-radius: 25px;
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            animation: modalPop 0.3s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalPop {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-icon { font-size: 4em; margin-bottom: 15px; }
+
+        .modal h2 {
+            font-family: 'Secular One', sans-serif;
+            color: var(--pink-dark);
+            margin-bottom: 10px;
+        }
+
+        .modal p { color: var(--gray); margin-bottom: 20px; }
+
+        .modal-btn {
+            background: var(--pink);
+            border: none;
+            border-radius: 15px;
+            color: white;
+            padding: 15px 40px;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn:hover { transform: scale(1.05); }
+
+        .copy-toast {
+            position: fixed;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        .copy-toast.show { opacity: 1; }
+
+        .comm-step {
+            background: var(--gray-light);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 12px;
+            text-align: right;
+            border-right: 4px solid var(--pink);
+        }
+
+        .comm-step-number {
+            width: 30px; height: 30px;
+            background: var(--pink);
+            border-radius: 50%;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .comm-step-title { font-weight: 600; margin-bottom: 5px; }
+        .comm-step-desc { color: var(--gray); font-size: 0.9em; }
+
+        .comm-example {
+            background: white;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 8px;
+            font-size: 0.85em;
+            font-style: italic;
+            color: var(--pink-dark);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--gray-light);
+            border-radius: 12px;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        .input-field:focus { outline: none; border-color: var(--pink); }
+
+        .collapsible-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--gray-light);
+            margin-bottom: 10px;
+        }
+
+        .collapsible-header:hover { opacity: 0.8; }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collapsible-content.show {
+            max-height: 2000px;
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-icon.open {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-bg" id="heartsBg"></div>
+
+    <div class="app-container">
+        <header class="header">
+            <span class="header-bsd">בס״ד</span>
+            <h1>הִתְקָרְבוּת</h1>
+            <p class="header-subtitle">המסע שלכם לזוגיות מדהימה</p>
+        </header>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('today')">היום</button>
+            <button class="nav-tab" onclick="showTab('messages')">הודעות</button>
+            <button class="nav-tab" onclick="showTab('notes')">פתקים</button>
+            <button class="nav-tab" onclick="showTab('challenges')">אתגרים</button>
+            <button class="nav-tab" onclick="showTab('movies')">סרטים</button>
+            <button class="nav-tab" onclick="showTab('dates')">דייטים</button>
+            <button class="nav-tab" onclick="showTab('dance')">ריקודים</button>
+        </nav>
+
+        <div class="content-wrapper">
+        <!-- TODAY SECTION -->
+        <section class="content-section active" id="today">
+            <div class="card mission-card">
+                <div class="card-header">
+                    <div class="card-icon pink">🎯</div>
+                    <div>
+                        <div class="card-title">המשימה של היום</div>
+                        <div class="card-subtitle">יום <span id="missionDay">1</span> - היכרות מחדש</div>
+                    </div>
+                </div>
+                <div class="mission-content" id="missionContent"></div>
+                <div class="mission-tip" id="missionTip"></div>
+                <button class="complete-btn" id="completeBtn" data-complete-mission>✓ השלמתי את המשימה</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon mint">❓</div>
+                    <div>
+                        <div class="card-title">שאלת העומק היומית</div>
+                        <div class="card-subtitle">לשיחה לפני השינה</div>
+                    </div>
+                </div>
+                <div class="mission-content" id="dailyQuestion"></div>
+            </div>
+
+            <div class="journal-card">
+                <div class="journal-date" id="journalDate"></div>
+                <div class="journal-prompt">💭 מה גילית היום על בן/בת הזוג שלך?</div>
+                <textarea class="journal-textarea" id="journalEntry" placeholder="כתבו כאן את המחשבות שלכם..."></textarea>
+                <button class="save-journal-btn" onclick="saveJournal()">💾 שמור</button>
+            </div>
+
+            <div id="savedJournals"></div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon gold">😊</div>
+                    <div>
+                        <div class="card-title">בא לי להעלות לך חיוך</div>
+                        <div class="card-subtitle">משימה קטנה להיום</div>
+                    </div>
+                </div>
+                <div class="mission-content" id="smileTask"></div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-number" id="streakDays">0</div>
+                    <div class="stat-label">ימים ברצף</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💝</div>
+                    <div class="stat-number" id="notesSent">0</div>
+                    <div class="stat-label">פתקים נכתבו</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MESSAGES SECTION -->
+        <section class="content-section" id="messages">
+            <h3 style="margin-bottom: 15px; font-weight: 600;">📱 בחרו זמן לשליחה:</h3>
+            <div class="messages-grid">
+                <div class="message-time-card active" onclick="selectTime('morning')">
+                    <div class="message-time-icon">🌅</div>
+                    <div class="message-time-label">בוקר</div>
+                </div>
+                <div class="message-time-card" onclick="selectTime('noon')">
+                    <div class="message-time-icon">☀️</div>
+                    <div class="message-time-label">צהריים</div>
+                </div>
+                <div class="message-time-card" onclick="selectTime('evening')">
+                    <div class="message-time-icon">🌙</div>
+                    <div class="message-time-label">ערב</div>
+                </div>
+            </div>
+
+            <div class="message-suggestions">
+                <h3 style="margin-bottom: 15px; font-weight: 600;">הודעות מומלצות (לחצו להעתקה):</h3>
+                <div id="messageSuggestions"></div>
+            </div>
+
+            <div class="card" style="margin-top: 20px;">
+                <div class="card-header">
+                    <div class="card-icon pink">✍️</div>
+                    <div><div class="card-title">כתבו הודעה משלכם</div></div>
+                </div>
+                <textarea class="notes-textarea" id="customMessage" placeholder="כתבו כאן הודעה אישית..."></textarea>
+                <div style="display:flex;gap:10px;margin-top:10px;">
+                    <button class="add-note-btn" style="flex:1" onclick="copyCustomMessage()">📋 העתק</button>
+                    <button class="add-note-btn" style="flex:1;background:#25D366" onclick="shareWhatsApp()">💬 שתף בוואטסאפ</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- NOTES SECTION -->
+        <section class="content-section" id="notes">
+            <div class="card">
+                <h3 style="margin-bottom: 15px; font-weight: 600;">📝 כתבו פתק חדש:</h3>
+                <textarea class="notes-textarea" id="newNoteText" placeholder="כתבו כאן פתק לבן/בת הזוג..."></textarea>
+                <button class="add-note-btn" onclick="addNote()">➕ הוסף פתק</button>
+            </div>
+
+            <div class="collapsible-header" onclick="toggleSection('noteSuggestionsSection')">
+                <h3 style="font-weight: 600;">💡 רעיונות לפתקים</h3>
+                <span class="toggle-icon" id="noteSuggestionsIcon">▼</span>
+            </div>
+            <div class="collapsible-content" id="noteSuggestionsSection">
+                <div id="noteSuggestions"></div>
+            </div>
+
+            <h3 style="margin: 20px 0 15px; font-weight: 600;">📌 הפתקים שכתבתי:</h3>
+            <div id="myNotes"></div>
+        </section>
+
+        <!-- CHALLENGES SECTION -->
+        <section class="content-section" id="challenges">
+            <h3 style="margin-bottom: 15px; font-weight: 600;">🎯 אתגר יומי:</h3>
+            <div id="dailyChallenge"></div>
+
+            <h3 style="margin: 20px 0 15px; font-weight: 600;">🏆 אתגר שבועי:</h3>
+            <div id="weeklyChallenge"></div>
+
+            <div class="collapsible-header" onclick="toggleSection('tiktokSection')">
+                <h3 style="font-weight: 600;">🎭 אתגרי טיקטוק</h3>
+                <span class="toggle-icon" id="tiktokSectionIcon">▼</span>
+            </div>
+            <div class="collapsible-content" id="tiktokSection">
+                <div id="tiktokChallenges"></div>
+            </div>
+
+            <div id="badgesContainer"></div>
+
+            <div class="card" style="margin-top: 20px;">
+                <div class="card-header">
+                    <div class="card-icon mint">➕</div>
+                    <div><div class="card-title">הוסיפו אתגר משלכם</div></div>
+                </div>
+                <textarea class="notes-textarea" id="customChallengeText" placeholder="תארו את האתגר..."></textarea>
+                <button class="complete-btn" onclick="addCustomChallenge()">➕ הוסף אתגר</button>
+            </div>
+
+            <h3 style="margin: 20px 0 15px; font-weight: 600;">✨ האתגרים שלנו:</h3>
+            <div id="customChallenges"></div>
+        </section>
+
+        <!-- MOVIES SECTION -->
+        <section class="content-section" id="movies">
+            <div class="card" style="background:var(--lavender);margin-bottom:20px;text-align:center;">
+                <div style="font-size:0.9em;color:var(--text);">
+                    💡 <b>איך זה עובד:</b> כל שבוע יש לכם סרט אחד לראות יחד, עם משימות ושאלות לדיון. הסרט מתחלף אוטומטית עם התקדמות הימים.
+                </div>
+            </div>
+            <div id="currentMovie"></div>
+            <div class="movie-questions" id="movieQuestions"></div>
+            <div class="collapsible-header" onclick="toggleSection('moviesListSection')">
+                <h3 style="font-weight: 600;">📋 כל הסרטים במסע (24 שבועות)</h3>
+                <span class="toggle-icon" id="moviesListSectionIcon">▼</span>
+            </div>
+            <div class="collapsible-content" id="moviesListSection">
+            <div id="moviesList"></div>
+            </div>
+        </section>
+
+        <!-- DATES SECTION -->
+        <section class="content-section" id="dates">
+            <div class="collapsible-header" onclick="toggleSection('dateIdeasSection')">
+                <h3 style="font-weight: 600;">💕 רעיונות לדייטים</h3>
+                <span class="toggle-icon" id="dateIdeasSectionIcon">▼</span>
+            </div>
+            <div class="collapsible-content" id="dateIdeasSection">
+                <div id="dateIdeas"></div>
+            </div>
+
+            <div class="card" style="margin-top: 20px;">
+                <div class="card-header">
+                    <div class="card-icon gold">💡</div>
+                    <div><div class="card-title">הוסיפו רעיון לדייט</div></div>
+                </div>
+                <input type="text" class="input-field" id="customDateTitle" placeholder="שם הדייט...">
+                <textarea class="notes-textarea" id="customDateDesc" placeholder="תיאור הדייט..."></textarea>
+                <button class="complete-btn" onclick="addCustomDate()">➕ הוסף רעיון</button>
+            </div>
+
+            <h3 style="margin: 20px 0 15px; font-weight: 600;">📌 הרעיונות שלנו:</h3>
+            <div id="customDates"></div>
+        </section>
+
+        <!-- DANCE SECTION -->
+        <section class="content-section" id="dance">
+            <div class="card" style="background:var(--lavender);text-align:center;margin-bottom:20px;">
+                <div style="font-size:2em;margin-bottom:10px;">💃🕺</div>
+                <h2 style="font-family:'Secular One',sans-serif;color:var(--pink-dark);margin-bottom:10px;">כוריאוגרפיות מצחיקות</h2>
+                <p style="color:var(--gray);">ריקודים פשוטים ומצחיקים לשירים מוכרים - לרקוד יחד ולצחוק!</p>
+            </div>
+
+            <div id="danceList"></div>
+        </section>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="goHome()">
+            <span class="nav-item-icon">🏠</span>
+            <span class="nav-item-label">היום</span>
+        </button>
+        <button class="nav-item" onclick="showModal('commModal')">
+            <span class="nav-item-icon">💬</span>
+            <span class="nav-item-label">תקשורת</span>
+        </button>
+        <button class="nav-item" onclick="showModal('ideasModal')">
+            <span class="nav-item-icon">💡</span>
+            <span class="nav-item-label">רעיונות</span>
+        </button>
+        <button class="nav-item" onclick="showModal('settingsModal')">
+            <span class="nav-item-icon">⚙️</span>
+            <span class="nav-item-label">הגדרות</span>
+        </button>
+    </nav>
+
+    <div class="copy-toast" id="copyToast">הועתק ללוח! 📋</div>
+
+    <!-- MODALS -->
+    <div class="modal-overlay" id="missionModal">
+        <div class="modal">
+            <div class="modal-icon">🎉</div>
+            <h2>כל הכבוד!</h2>
+            <p>השלמתם את משימת היום!</p>
+            <p style="font-size: 1.2em; color: var(--gold-dark);">+10 נקודות 🏆</p>
+            <button class="modal-btn" onclick="closeModal('missionModal')">המשך</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="commModal">
+        <div class="modal" style="text-align: right; max-height: 90vh; overflow-y: auto;">
+            <h2 style="text-align: center;">💬 תקשורת מקרבת</h2>
+            <p style="text-align: center;">4 השלבים לשיחה בונה - כתבו ותרגלו!</p>
+            
+            <div class="comm-step">
+                <div class="comm-step-number">1</div>
+                <div class="comm-step-title">תצפית</div>
+                <div class="comm-step-desc">תארו מה ראיתם או שמעתם, בלי שיפוט</div>
+                <div class="comm-example">"כשראיתי את הכלים בכיור..."</div>
+                <textarea class="notes-textarea" id="commStep1" placeholder="כתבו את התצפית שלכם..." style="margin-top:10px;"></textarea>
+            </div>
+            
+            <div class="comm-step">
+                <div class="comm-step-number">2</div>
+                <div class="comm-step-title">רגש</div>
+                <div class="comm-step-desc">שתפו איך הרגשתם</div>
+                <div class="comm-example">"הרגשתי עייפות ובדידות..."</div>
+                <textarea class="notes-textarea" id="commStep2" placeholder="כתבו את הרגש שלכם..." style="margin-top:10px;"></textarea>
+            </div>
+            
+            <div class="comm-step">
+                <div class="comm-step-number">3</div>
+                <div class="comm-step-title">צורך</div>
+                <div class="comm-step-desc">הסבירו מה אתם צריכים</div>
+                <div class="comm-example">"כי אני צריכה שותפות..."</div>
+                <textarea class="notes-textarea" id="commStep3" placeholder="כתבו את הצורך שלכם..." style="margin-top:10px;"></textarea>
+            </div>
+            
+            <div class="comm-step">
+                <div class="comm-step-number">4</div>
+                <div class="comm-step-title">בקשה</div>
+                <div class="comm-step-desc">בקשו משהו ספציפי</div>
+                <div class="comm-example">"האם תוכל לשטוף הערב?"</div>
+                <textarea class="notes-textarea" id="commStep4" placeholder="כתבו את הבקשה שלכם..." style="margin-top:10px;"></textarea>
+            </div>
+            
+            <div style="display:flex;gap:10px;margin-top:15px;">
+                <button class="add-note-btn" style="flex:1;" data-save-comm>💾 שמור</button>
+                <button class="add-note-btn" style="flex:1;background:#25D366;" data-share-comm>💬 שתף בוואטסאפ</button>
+            </div>
+            
+            <div id="savedCommNotes" style="margin-top:20px;"></div>
+            
+            <button class="modal-btn" style="width: 100%; margin-top: 15px;" data-close-comm>סגור</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="ideasModal">
+        <div class="modal" style="text-align: right;">
+            <h2 style="text-align: center;">💡 הרעיונות שלנו</h2>
+            <div style="display: flex; gap: 10px; margin: 15px 0;">
+                <input type="text" class="input-field" id="newIdea" placeholder="רעיון חדש..." style="flex: 1; margin: 0;">
+                <button class="modal-btn" onclick="addIdea()" style="padding: 10px 20px;">➕</button>
+            </div>
+            <div id="ideasList"></div>
+            <button class="modal-btn" onclick="closeModal('ideasModal')" style="width: 100%; margin-top: 15px; background: var(--gray);">סגור</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal">
+            <h2>⚙️ הגדרות</h2>
+            <div style="text-align: right; margin: 20px 0;">
+                <label style="display: block; margin-bottom: 10px; font-weight: 600;">יום נוכחי:</label>
+                <input type="number" class="input-field" id="dayInput" min="1" max="100" value="1">
+            </div>
+            <button class="modal-btn" onclick="updateDay()" style="width: 100%; margin-bottom: 10px;">עדכן יום</button>
+            <button class="modal-btn" onclick="resetAll()" style="width: 100%; background: #EF5350;">🔄 אפס הכל</button>
+            <button class="modal-btn" onclick="closeModal('settingsModal')" style="width: 100%; margin-top: 10px; background: var(--gray);">סגור</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="dateDetailModal">
+        <div class="modal" style="max-width:450px;text-align:right;">
+            <div id="dateDetailContent"></div>
+            <button class="modal-btn" onclick="closeModal('dateDetailModal')" style="width:100%;margin-top:20px;">סגור</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="movieDetailModal">
+        <div class="modal" style="max-width:450px;text-align:right;">
+            <div id="movieDetailContent"></div>
+            <button class="modal-btn" onclick="closeModal('movieDetailModal')" style="width:100%;margin-top:20px;">סגור</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="danceDetailModal">
+        <div class="modal" style="max-width:450px;text-align:right;">
+            <div id="danceDetailContent"></div>
+            <button class="modal-btn" onclick="closeModal('danceDetailModal')" style="width:100%;margin-top:20px;">סגור</button>
+        </div>
+    </div>
+
+    <script>
+        // ========== RESET FUNCTION ==========
+        function doReset() {
+            alert('מאפס את כל ההתקדמות...');
+            localStorage.removeItem('100days');
+            location.reload();
+        }
+
+        // ========== DATA ==========
+        const missions = [
+            {day:1, phase:"היכרות מחדש", mission:"ספרו אחד לשני 3 דברים שהצד השני לא יודע עליכם. יכול להיות משהו מהילדות, חלום סודי, או פשוט עובדה מפתיעה.", tip:"תנו לשני לסיים לדבר לפני שמגיבים. הקשבה אמיתית היא המפתח."},
+            {day:2, phase:"היכרות מחדש", mission:"שאלו אחד את השני: 'מה החלום שוויתרת עליו?' הקשיבו בלי לשפוט.", tip:"אל תנסו 'לתקן' או להציע פתרונות. פשוט היו שם."},
+            {day:3, phase:"היכרות מחדש", mission:"שבו מול המראה יחד וספרו לעצמכם מה אתם אוהבים בבן/בת הזוג.", tip:"זה יכול להרגיש מביך - וזה בדיוק הרעיון!"},
+            {day:4, phase:"היכרות מחדש", mission:"שחקו 'אמת או אמת' - 10 שאלות כנות, בלי חובה.", tip:"שאלות מומלצות: מה הכי מפחיד אותך? מתי הרגשת הכי אהוב/ה?"},
+            {day:5, phase:"היכרות מחדש", mission:"כתבו כל אחד 5 דברים שאתם אוהבים בזוגיות הזו ושתפו.", tip:"היו ספציפיים! 'אני אוהב איך שאת צוחקת כשאני מספר בדיחות גרועות'"},
+            {day:6, phase:"היכרות מחדש", mission:"ספרו אחד לשני על הרגע שבו ידעתם 'זה האחד/ת'.", tip:"אם לא היה רגע כזה - ספרו מתי הרגשתם הכי קרובים."},
+            {day:7, phase:"היכרות מחדש", mission:"🎉 טקס סיכום שבוע ראשון! שבו יחד ודברו על מה למדתם השבוע.", tip:"חגגו עם משהו מיוחד - אפילו כוס יין או קינוח."},
+            {day:8, phase:"הקשבה", mission:"5 דקות של הקשבה: אחד מדבר, השני רק מקשיב בלי לקטוע.", tip:"שימו טיימר! 5 דקות זה יותר ארוך ממה שנדמה."},
+            {day:9, phase:"הקשבה", mission:"תרגלו שיקוף: 'מה ששמעתי זה...' ואז השני מאשר או מתקן.", tip:"זה מרגיש מלאכותי בהתחלה, אבל זה משנה הכל."},
+            {day:10, phase:"הקשבה", mission:"שאלו 3 שאלות המשך על משהו שבן/בת הזוג סיפרו. העמיקו!", tip:"שאלות כמו: 'ואיך זה גרם לך להרגיש?' 'ומה עשית אז?'"},
+            {day:11, phase:"הקשבה", mission:"שיחה בשיטת התקשורת המקרבת: תצפית, רגש, צורך, בקשה.", tip:"לחצו על 'תקשורת' בתפריט התחתון למדריך מלא."},
+            {day:12, phase:"הקשבה", mission:"יום של 'כן, ו...' - כל פעם שהשני אומר משהו, תגיבו ב'כן, ו...'", tip:"זה תרגיל מאילתור. מונע ביקורת אוטומטית."},
+            {day:13, phase:"הקשבה", mission:"שבו בשקט 10 דקות יחד. בלי טלפונים, בלי מסכים. רק להיות.", tip:"קשה? זה בדיוק למה זה חשוב."},
+            {day:14, phase:"הקשבה", mission:"🎉 סוף שבוע שני! מה השתנה באופן שאתם מקשיבים אחד לשני?", tip:"כתבו את זה ביומן באפליקציה."},
+            {day:15, phase:"מגע", mission:"חיבוק של 30 שניות בשקט מוחלט. בלי לדבר, רק להחזיק.", tip:"30 שניות זה הזמן שלוקח לגוף לשחרר אוקסיטוצין."}
+        ];
+
+        const questions = [
+            "מה הדבר שהכי מפחיד אותך לגבי העתיד שלנו יחד?",
+            "מתי הרגשת הכי גאה בי?",
+            "מה היית רוצה שנעשה יותר יחד?",
+            "איזה זיכרון משותף הכי יקר לך?",
+            "מה למדת עליי שהפתיע אותך?",
+            "מה אתה צריך ממני שאני לא נותנת?",
+            "איזה חלום משותף יש לנו שעוד לא הגשמנו?",
+            "מה הדבר הקטן שאני עושה שמשמח אותך?",
+            "מתי הרגשת הכי רחוק ממני? מה קרה?",
+            "מה היית משנה בזוגיות שלנו אם יכולת?",
+            "איזו מילה מתארת את האהבה שלנו?",
+            "מה אתה הכי אוהב בבית שלנו?",
+            "איך נראה יום מושלם יחד?",
+            "מה גורם לך להרגיש הכי אהוב/ה?",
+            "מה היית רוצה שאדע עליך שאני לא יודע/ת?"
+        ];
+
+        const smileTasks = [
+            "שלחו לבן/בת הזוג תמונה ישנה משעשעת שלכם יחד",
+            "שלחו מם מצחיק שמזכיר לכם אחד את השני",
+            "הזכירו רגע מביך משותף וצחקו עליו יחד",
+            "עשו חיקוי של בן/בת הזוג (בחיבה!)",
+            "ספרו בדיחה - גם אם היא גרועה, זה הרעיון!",
+            "שלחו הודעה קולית עם שיר",
+            "ציירו ציור מכוער אחד של השני",
+            "כתבו שיר קצר וגרוע על בן/בת הזוג",
+            "שלחו GIF שמתאר את הזוגיות שלכם",
+            "העמידו פנים שאתם קריין חדשות ודווחו על משהו שקרה היום"
+        ];
+
+        const msgData = {
+            morning: [
+                "בוקר טוב לאדם הכי חשוב בחיים שלי 💕",
+                "קמתי וחשבתי עליך. שיהיה לך יום מדהים!",
+                "חולמת להיות איתך כבר עכשיו ☀️",
+                "אתה הסיבה שאני מחייכת בבוקר",
+                "שיהיה לך יום נפלא - מגיע לך! 💝"
+            ],
+            noon: [
+                "רק רציתי להגיד שאני חושב/ת עליך 💭",
+                "מה הדבר הכי טוב שקרה לך היום?",
+                "סופר/ת את הדקות עד שנהיה יחד 💕",
+                "הפסקה קטנה לשלוח לך אהבה ☀️",
+                "רק רציתי שתדע/י - את/ה מדהים/ה"
+            ],
+            evening: [
+                "עוד מעט נתראה! 😊",
+                "מה היית צריך/ה היום שלא קיבלת?",
+                "יש לי הפתעה קטנה בשבילך בבית 🎁",
+                "חושב/ת על הערב שלנו יחד 💕",
+                "מתגעגע/ת אליך!"
+            ]
+        };
+
+        const noteSugg = [
+            "בזכותך יש לי סיבה לחייך כל יום 💕",
+            "תודה שאת/ה מאמין/ה בי",
+            "אני אוהב/ת את הדרך שאת/ה צוחק/ת",
+            "זוכר/ת את הפעם ש...? זה עדיין מחמם לי את הלב",
+            "הדבר שהכי מפתיע אותי בך הוא...",
+            "תודה שאת/ה תמיד שם בשבילי",
+            "את/ה הבית שלי 🏠",
+            "גם אחרי כל הזמן הזה - אני עדיין מאוהב/ת בך",
+            "הכי טוב לי איתך",
+            "את/ה גורם/ת לי להיות אדם טוב יותר"
+        ];
+
+        const dailyChallenges = [
+            // אתגרי סנכרון
+            {title:"🎵 ריקוד 15 שניות", desc:"ללמוד יחד ריקוד טיקטוק פשוט ולצלם!", cat:"סנכרון"},
+            {title:"🗣️ להגיד ביחד", desc:"לענות על שאלה באותו רגע ולראות אם עניתם אותו דבר!", cat:"סנכרון"},
+            {title:"🍽️ לאכול ביחד", desc:"לאכול אותו דבר בסנכרון מושלם - כל ביס יחד!", cat:"סנכרון"},
+            {title:"👗 להתלבש אותו דבר", desc:"יום שלם של בגדים תואמים!", cat:"סנכרון"},
+            {title:"🚶 ללכת בצעד", desc:"לצאת להליכה ולהתאים צעדים - כמו צבא רומנטי!", cat:"סנכרון"},
+            {title:"🎤 לשיר ביחד", desc:"לבחור שיר ולשיר אותו יחד בסנכרון מושלם.", cat:"סנכרון"},
+            // אתגרי הכרות
+            {title:"📱 טלפון פתוח", desc:"תנו לבן/בת הזוג לגלול בטלפון שלכם 2 דקות. בלי מחיקות מראש!", cat:"הכרות"},
+            {title:"🎒 מה בתיק", desc:"לנחש מה יש בתיק או בארנק של השני. כמה אתם מכירים?", cat:"הכרות"},
+            {title:"🍕 הזמנה עיוורת", desc:"להזמין אוכל אחד לשני בלי לשאול מה השני רוצה.", cat:"הכרות"},
+            {title:"🎁 מתנה ב-20 ש\"ח", desc:"לקנות מתנה קטנה שמראה שאתם באמת מכירים אחד את השני.", cat:"הכרות"},
+            {title:"📝 10 דברים", desc:"כל אחד כותב 10 דברים שהוא אוהב בשני - להשוות!", cat:"הכרות"},
+            {title:"🔮 לנחש מה השני חושב", desc:"לשאול שאלה ולנחש את התשובה לפני שהשני עונה.", cat:"הכרות"},
+            {title:"📅 לזכור תאריכים", desc:"כמה תאריכים חשובים אתם זוכרים? דייט ראשון, נשיקה ראשונה...", cat:"הכרות"},
+            {title:"💭 החלום שלו/ה", desc:"לספר מה לדעתכם החלום הכי גדול של השני. לראות אם צדקתם!", cat:"הכרות"},
+            // אתגרי אמון
+            {title:"👀 מבט לעיניים", desc:"4 דקות להסתכל בעיניים בשקט מוחלט. בלי לדבר, בלי לצחוק.", cat:"אמון"},
+            {title:"🤝 ליפול אחורה", desc:"אתגר האמון הקלאסי - ליפול אחורה והשני תופס.", cat:"אמון"},
+            {title:"🚗 ניווט עיוור", desc:"אחד עם עיניים עצומות, השני מנווט אותו בחדר או בחוץ.", cat:"אמון"},
+            {title:"🍳 בישול עיוור", desc:"לבשל עם עיניים קשורות, השני רק מנחה במילים!", cat:"אמון"},
+            {title:"🔐 לשתף סוד", desc:"לספר משהו שמעולם לא סיפרתם לאף אחד.", cat:"אמון"},
+            {title:"💔 לדבר על פחדים", desc:"לשתף את הפחד הכי עמוק שלכם.", cat:"אמון"},
+            {title:"🙏 לבקש משהו קשה", desc:"לבקש משהו שתמיד פחדתם לבקש.", cat:"אמון"},
+            {title:"📖 לקרוא יומן", desc:"לתת לשני לקרוא משהו אישי שכתבתם.", cat:"אמון"},
+            // אתגרי כיף
+            {title:"💄 מאקאפ/גילוח", desc:"לאפר או לגלח אחד את השני. מה יכול להשתבש? 😄", cat:"כיף"},
+            {title:"🎨 לצייר אחד את השני", desc:"דקה אחת לצייר את בן/בת הזוג. התוצאות מובטחות להצחיק!", cat:"כיף"},
+            {title:"🎤 קריוקי דואט", desc:"לשיר שיר יחד - בבית או בקריוקי בר. בלי בושה!", cat:"כיף"},
+            {title:"🕺 לרקוד בלי מוזיקה", desc:"אחד רוקד, השני מנסה לנחש איזה שיר זה.", cat:"כיף"},
+            {title:"😂 מחמאה לזר", desc:"יחד, תנו מחמאה כנה לאדם זר ברחוב או בחנות.", cat:"כיף"},
+            {title:"🚫 יום בלי תלונות", desc:"24 שעות בלי להתלונן על שום דבר. כל תלונה = חיבוק!", cat:"כיף"},
+            {title:"🎭 חיקויים", desc:"לעשות חיקוי אחד של השני. הכי מדויק שאפשר!", cat:"כיף"},
+            {title:"📸 סשן צילומים", desc:"לצלם אחד את השני כמו מקצוענים. 50 תמונות לפחות!", cat:"כיף"},
+            {title:"🎬 לצלם סרטון", desc:"ליצור סרטון TikTok או Reels יחד.", cat:"כיף"},
+            {title:"👶 תמונות ילדות", desc:"להראות תמונות מגיל 5 ולספר סיפורים.", cat:"כיף"},
+            // אתגרי תקשורת
+            {title:"👂 5 דקות הקשבה", desc:"אחד מדבר 5 דקות, השני רק מקשיב. בלי לקטוע!", cat:"תקשורת"},
+            {title:"🪞 שיקוף", desc:"לתרגל 'מה ששמעתי זה...' - לוודא שהבנתם נכון.", cat:"תקשורת"},
+            {title:"❓ 3 שאלות המשך", desc:"על כל דבר שהשני אומר - לשאול 3 שאלות העמקה.", cat:"תקשורת"},
+            {title:"💬 תקשורת מקרבת", desc:"להשתמש בנוסחה: תצפית, רגש, צורך, בקשה.", cat:"תקשורת"},
+            {title:"📵 שעה בלי טלפון", desc:"שעה של שיחה פנים אל פנים, טלפונים בחדר אחר.", cat:"תקשורת"},
+            {title:"✍️ לכתוב במקום לדבר", desc:"שעה של תקשורת רק בכתב - פתקים!", cat:"תקשורת"},
+            // אתגרי רומנטיקה
+            {title:"💋 10 נשיקות", desc:"לפזר 10 נשיקות במהלך היום - במקומות מפתיעים.", cat:"רומנטיקה"},
+            {title:"🌹 הפתעה קטנה", desc:"להכין הפתעה קטנה - פתק, פרח, ממתק.", cat:"רומנטיקה"},
+            {title:"💑 חיבוק 30 שניות", desc:"חיבוק ארוך בשקט מוחלט. 30 שניות לפחות.", cat:"רומנטיקה"},
+            {title:"👫 להחזיק ידיים", desc:"כל היום להחזיק ידיים בכל הזדמנות.", cat:"רומנטיקה"},
+            {title:"💝 מחמאה כל שעה", desc:"להגדיר תזכורת ולתת מחמאה כל שעה.", cat:"רומנטיקה"},
+            {title:"🎵 השיר שלנו", desc:"להקשיב ל'שיר שלנו' ולרקוד.", cat:"רומנטיקה"},
+            // אתגרי הרפתקה
+            {title:"🗺️ מקום חדש", desc:"ללכת למקום שאף אחד מכם לא היה בו.", cat:"הרפתקה"},
+            {title:"🍜 אוכל חדש", desc:"להזמין מנה שאף פעם לא אכלתם.", cat:"הרפתקה"},
+            {title:"🚌 תחבורה ציבורית", desc:"לנסוע באוטובוס/רכבת ליעד אקראי.", cat:"הרפתקה"},
+            {title:"👋 לדבר עם זרים", desc:"להתחיל שיחה עם זוג זר.", cat:"הרפתקה"},
+            {title:"📵 יום אנלוגי", desc:"יום שלם בלי מסכים - רק אחד עם השני.", cat:"הרפתקה"},
+            {title:"🌙 לצאת בלילה", desc:"לצאת ב-2 בלילה לטיול או לאכול משהו.", cat:"הרפתקה"}
+        ];
+
+        const weeklyChallenges = [
+            {week:1, title:"📸 אתגר התמונות", desc:"7 סלפי זוגיים ב-7 מיקומים שונים השבוע. צרו אלבום!"},
+            {week:2, title:"📵 אתגר ה-24 שעות", desc:"יום שלם בלי טלפונים. כן, שניכם. מתחילים מהבוקר."},
+            {week:3, title:"👨‍🍳 אתגר הבישול", desc:"לבשל ארוחה מושלמת יחד מאפס. לא הזמנות!"},
+            {week:4, title:"🎁 אתגר ההפתעות", desc:"כל יום השבוע, הפתעה קטנה אחת לבן/בת הזוג."},
+            {week:5, title:"💭 אתגר הזיכרונות", desc:"לשחזר את הדייט הראשון שלכם. אותו מקום, אותה אווירה."},
+            {week:6, title:"🔄 אתגר החילופין", desc:"להחליף תפקידים בבית ליום שלם!"},
+            {week:7, title:"🤫 אתגר הסודות", desc:"כל יום לגלות סוד אחד שהשני לא יודע."},
+            {week:8, title:"💕 אתגר המחמאות", desc:"10 מחמאות ביום לבן/בת הזוג. כן, 10!"},
+            {week:9, title:"✅ אתגר ה\"כן\"", desc:"להגיד כן לכל בקשה סבירה של השני."},
+            {week:10, title:"👫 אתגר הזוגיות", desc:"לעשות הכל יחד - ממש הכל. יום שלם."},
+            {week:11, title:"🤐 אתגר השתיקה", desc:"שעה ביום לתקשר בלי מילים. רק מבטים ומגע."},
+            {week:12, title:"❤️ אתגר הרומנטיקה", desc:"כל יום מעשה רומנטי אחד. קטן או גדול."},
+            {week:13, title:"✨ אתגר החלומות", desc:"לתכנן יחד משהו גדול - טיול, פרויקט, חלום."},
+            {week:14, title:"🎉 אתגר החגיגה", desc:"לחגוג את מה שבניתם יחד ב-100 ימים!"}
+        ];
+
+        const tiktokCh = [
+            {title:"מי יותר סביר (Most Likely To)", desc:"יושבים גב לגב, מחזיקים נעל של כל אחד. שואלים שאלות ומרימים נעל של מי שיותר סביר. למשל: 'מי יותר סביר להירדם בסרט?' 'לשכוח יום נישואין?'", popular:true},
+            {title:"תגיד משהו (Say Something)", desc:"בוחרים קטגוריה כמו 'דברים שאני אוהב בך'. 10 שניות להגיד כמה שיותר - מי שנתקע מפסיד!", popular:true},
+            {title:"Whisper Challenge", desc:"אחד עם אוזניות ומוזיקה חזקה, השני מדבר משפטים. לנסות לקרוא שפתיים!", popular:true},
+            {title:"אל תצחק (Try Not to Laugh)", desc:"אחד מנסה להצחיק, השני לא יכול אפילו לחייך. מי מחזיק יותר זמן?", popular:true},
+            {title:"Finish the Lyric", desc:"לשיר שיר ולעצור באמצע - השני צריך להמשיך. שירים מהחתונה או מתקופת ההיכרות!", popular:true},
+            {title:"מה יש לי על הגב?", desc:"להדביק פתק עם מילה על הגב. לשאול שאלות כן/לא ולנחש מה כתוב.", popular:true},
+            {title:"אתגר הפוקר פייס", desc:"להגיד לבן/בת הזוג משהו רומנטי או מביך - הוא/היא לא יכולים להגיב. לצלם את הפרצוף!", popular:true},
+            {title:"מה אני מצייר?", desc:"לצייר על הגב של בן/בת הזוג באצבע - הוא/היא צריכים לנחש מה זה!", popular:true},
+            {title:"Assumptions Challenge", desc:"כל אחד אומר הנחות על השני - 'אני מניח שאת...' - לראות כמה נכון!", popular:true},
+            {title:"תשובה באותה מילה", desc:"לענות על שאלות באותו זמן ולראות אם אמרתם אותו דבר.", popular:true},
+            {title:"Kiss or Slap", desc:"אחד עם עיניים עצומות - השני מחליט לנשק או לסטור קלות. לנחש מה יהיה!", popular:false},
+            {title:"Accent Challenge", desc:"לדבר זה עם זה במבטאים שונים - אמריקאי, צרפתי, רוסי...", popular:false},
+            {title:"Bite, Lick or Nothing", desc:"עיניים עצומות - השני מחליט לנשוך, ללקק או לא לעשות כלום. לנחש!", popular:false},
+            {title:"Guess the Body Part", desc:"עיניים עצומות - לנשק מקום אקראי על הגוף. השני מנחש איפה.", popular:false},
+            {title:"Rate Your Partner", desc:"לדרג אחד את השני ב-1-10 בקטגוריות שונות. בכנות!", popular:false},
+            {title:"Who Knows Who Better", desc:"שאלות על בן/בת הזוג - מי יודע יותר על השני?", popular:true},
+            {title:"Chapstick Challenge", desc:"שפתון בטעם - לנחש איזה טעם רק מנשיקה.", popular:false},
+            {title:"Yoga Challenge", desc:"לנסות לעשות תנוחות יוגה יחד - לצלם את הכשלונות!", popular:false}
+        ];
+
+        // מערכת תגים
+        const badges = [
+            {name:"🥉 מתחילים", required:7, desc:"השלמת 7 אתגרים"},
+            {name:"🥈 מסונכרנים", required:30, desc:"השלמת 30 אתגרים"},
+            {name:"🥇 זוג על", required:60, desc:"השלמת 60 אתגרים"},
+            {name:"💎 אלופים", required:100, desc:"השלמת 100 אתגרים"}
+        ];
+
+        const movies = [
+            {week:1, title:"הנסיכה הקסומה (The Princess Bride)", why:"קליל, מצחיק ורומנטי - הדרך המושלמת להתחיל", task:"לצטט משפטים מהסרט כל היום למחרת", questions:["איזה חלק היה הכי מצחיק?","איזו דמות דומה לכל אחד מכם?","מה הציטוט האהוב?"]},
+            {week:2, title:"נוטינג היל (Notting Hill)", why:"אהבה מנצחת את כל המכשולים", task:"לערוך פיקניק יחד השבוע", questions:["מאמינים באהבה ממבט ראשון?","מה הייתם עושים במקום הגיבור?","איך מתמודדים עם הבדלים?"]},
+            {week:3, title:"כשהארי פגש את סאלי", why:"חברות ואהבה - האם אפשר גם וגם?", task:"להתנהג כאילו זה דייט ראשון", questions:["מתי ידעתם שזה 'זה'?","האם הייתם חברים לפני?","מה הכי מצחיק בזוגיות?"]},
+            {week:4, title:"המחברת (The Notebook)", why:"אהבה שעוברת את מבחן הזמן", task:"לכתוב מכתב אהבה אחד לשני", questions:["הייתם מחכים 7 שנים?","איך אתם בעוד 40 שנה?","מה הרגע הכי רומנטי שלכם?"]},
+            {week:5, title:"לפני הזריחה (Before Sunrise)", why:"שיחות עומק ואינטימיות אמיתית", task:"לצאת לטיול ולדבר כמו בסרט", questions:["מה הייתם עושים אם נשאר לכם רק לילה אחד?","איזו שאלה עוד לא שאלתם?","מה גיליתם על עצמכם?"]},
+            {week:6, title:"לה לה לנד (La La Land)", why:"חלומות, פשרות ואהבה", task:"ללמוד ריקוד יחד מיוטיוב", questions:["האם ויתרתם על חלום בגלל הקשר?","מה החלום המשותף שלכם?","איך מאזנים בין קריירה לאהבה?"]},
+            {week:7, title:"חתונה יוונית גדולה", why:"משפחה, הומור ואהבה", task:"לצחוק יחד על המשפחות שלכם", questions:["מה הכי מצחיק במשפחה שלכם?","איך מתמודדים עם משפחה מורחבת?","מה למדתם מהמשפחה של השני?"]},
+            {week:8, title:"טיטאניק (Titanic)", why:"אהבה גדולה ורגעים בלתי נשכחים", task:"לעשות את 'תנוחת הספינה' בשקיעה", questions:["מה הייתם עושים במקומם?","מה הרגע הכי דרמטי בקשר שלכם?","על מה לא הייתם מוותרים?"]},
+            {week:9, title:"Up (פיקסאר)", why:"לבנות חיים יחד, חלומות משותפים", task:"לתכנן הרפתקה משותפת לעתיד", questions:["מה ב'ספר ההרפתקאות' שלכם?","איזה חלום רוצים להגשים יחד?","מה למדתם על אהבה ארוכת שנים?"]},
+            {week:10, title:"מכתבים לג'ולייט (Letters to Juliet)", why:"אהבה אבודה שנמצאת מחדש", task:"לכתוב מכתב לעצמכם בעוד שנה", questions:["האם יש אהבה אבודה בעבר?","מה הייתם כותבים לעצמכם?","מה למדתם על סליחה?"]},
+            {week:11, title:"Crazy Rich Asians", why:"משפחה, תרבות ובחירה באהבה", task:"לארגן ארוחה מיוחדת יחד", questions:["מה הייתם מוותרים בשביל האהבה?","איך מתמודדים עם ציפיות משפחתיות?","מה עושה אתכם עשירים?"]},
+            {week:12, title:"50 דייטים ראשונים", why:"להתאהב מחדש כל יום", task:"ליום אחד - להתנהג כאילו נפגשתם עכשיו", questions:["מה הייתם עושים במקום הגיבור?","איך שומרים על ריגוש?","מה זה אהבה אמיתית?"]},
+            {week:13, title:"The Proposal", why:"כשאהבה צומחת מהמקום הכי לא צפוי", task:"לספר זה לזה משהו מביך", questions:["מה הפתיע אתכם בקשר?","האם נוצרו רגשות לא צפויים?","מה למדתם על עצמכם?"]},
+            {week:14, title:"Pride and Prejudice (2005)", why:"גאווה, דעות קדומות ואהבה שמנצחת", task:"לכתוב מכתב רומנטי בסגנון ישן", questions:["האם היו דעות קדומות בהתחלה?","מה השתנה בהתרשמות הראשונית?","מה הכי רומנטי בסרט?"]},
+            {week:15, title:"Eternal Sunshine of the Spotless Mind", why:"זיכרונות, כאב ואהבה שלא נשכחת", task:"לדבר על רגעים קשים ומה למדתם מהם", questions:["האם הייתם מוחקים זיכרונות?","מה הזיכרון הכי יקר?","מה למדתם מרגעים קשים?"]},
+            {week:16, title:"Sleepless in Seattle", why:"גורל, רומנטיקה ותקווה", task:"להאזין יחד לתוכנית רדיו", questions:["מאמינים בגורל?","איך נפגשתם?","מה היה קורה אם לא נפגשתם?"]},
+            {week:17, title:"The Vow", why:"אהבה שמתחילה מחדש", task:"לספר זה לזה את סיפור ההיכרות", questions:["מה הייתם עושים אם השני שכח הכל?","איזה רגע הכי חשוב לזכור?","מה עושה את הקשר שלכם מיוחד?"]},
+            {week:18, title:"About Time", why:"זמן, משפחה ולחיות כל רגע", task:"לעשות יום 'מושלם' יחד", questions:["מה הייתם משנים אם יכולתם לחזור בזמן?","איך מנצלים כל רגע?","מה הכי חשוב בחיים?"]},
+            {week:19, title:"Silver Linings Playbook", why:"שני אנשים שבורים שמרפאים זה את זה", task:"ללמוד ריקוד יחד", questions:["איך עוזרים זה לזה בקשיים?","מה הצד החיובי שמצאתם יחד?","איך מקבלים את החלקים הלא מושלמים?"]},
+            {week:20, title:"A Walk to Remember", why:"אהבה שמשנה חיים", task:"לעשות משהו מרשימת החלומות", questions:["מה בן/בת הזוג שינה בכם?","מה עוד לא עשיתם יחד?","מה האהבה הזו לימדה אתכם?"]},
+            {week:21, title:"Ghost", why:"אהבה שחזקה יותר מהכל", task:"ליצור משהו יחד מחימר/בצק", questions:["מה הייתם רוצים להגיד אם לא הייתם יכולים?","איך מביעים אהבה בלי מילים?","מה יישאר לנצח?"]},
+            {week:22, title:"Dirty Dancing", why:"תשוקה, ריקוד והתבגרות", task:"לרקוד יחד בסלון", questions:["מה גורם לכם להרגיש חופשיים?","מתי יצאתם מאזור הנוחות יחד?","מה הרגע הכי 'חם' שלכם?"]},
+            {week:23, title:"You've Got Mail", why:"אהבה בעידן הדיגיטלי", task:"לשלוח אימייל רומנטי זה לזה", questions:["מה היו ההודעות הראשונות ביניכם?","מה שומרים מהם?","איך הטכנולוגיה משפיעה על הקשר?"]},
+            {week:24, title:"Love Actually", why:"אהבה בכל הצורות שלה", task:"לעשות מעשה רומנטי מפתיע", questions:["איזה סיפור בסרט הכי מדבר אליכם?","מה האהבה אומרת לכם?","איך מביעים אהבה בצורה יצירתית?"]}
+        ];
+
+        const dances = [
+            {
+                song: "🎵 Stayin' Alive - Bee Gees",
+                level: "קל",
+                duration: "3 דקות",
+                desc: "הריקוד הכי קלאסי לזוגות!",
+                steps: [
+                    "🚶 צעדו יחד קדימה בסטייל - יד על המותן",
+                    "👆 הצביעו למעלה לסירוגין (ימין, שמאל)",
+                    "🕺 סובבו את האגן בעיגולים",
+                    "👯 פנו אחד לשני והצביעו זה על זה",
+                    "🔄 סיבוב 360 מעלות יחד",
+                    "💃 חזרו על הכל עם הגזמה מקסימלית!"
+                ]
+            },
+            {
+                song: "🎵 Uptown Funk - Bruno Mars",
+                level: "בינוני",
+                duration: "4 דקות",
+                desc: "ריקוד אנרגטי ומצחיק!",
+                steps: [
+                    "😎 עמדו בפוזה של כוכבי רוק",
+                    "👏 מחיאות כפיים מסונכרנות",
+                    "🚶 3 צעדים ימינה, 3 צעדים שמאלה",
+                    "💪 הניפו את הידיים למעלה והורידו",
+                    "🎤 העמידו פנים שאתם שרים למיקרופון",
+                    "🔥 סיום: פוזה דרמטית יחד!"
+                ]
+            },
+            {
+                song: "🎵 Macarena - Los Del Rio",
+                level: "קל מאוד",
+                duration: "3 דקות",
+                desc: "הקלאסיקה שכולם מכירים!",
+                steps: [
+                    "👐 ידיים קדימה, כפות למעלה",
+                    "🙌 הפכו את הכפות למטה",
+                    "💪 יד ימין על כתף שמאל, אחר כך להפך",
+                    "🙆 ידיים מאחורי הראש",
+                    "🕺 ידיים על המותניים ותנועת ירכיים",
+                    "🔄 קפיצה וסיבוב 90 מעלות - חזרו!"
+                ]
+            },
+            {
+                song: "🎵 YMCA - Village People",
+                level: "קל",
+                duration: "4 דקות",
+                desc: "צרו את האותיות עם הגוף!",
+                steps: [
+                    "🙆 Y - ידיים למעלה בצורת V",
+                    "💪 M - ידיים על הראש כמו גג",
+                    "🤲 C - יד אחת מעוגלת בצד",
+                    "🙋 A - ידיים מעל הראש משולבות",
+                    "🕺 בין האותיות - רקדו חופשי!",
+                    "👯 נסו לעשות את זה מול המראה"
+                ]
+            },
+            {
+                song: "🎵 Thriller - Michael Jackson",
+                level: "בינוני",
+                duration: "5 דקות",
+                desc: "הפכו לזומבים יחד!",
+                steps: [
+                    "🧟 הליכת זומבי - ידיים קדימה, רגליים נוקשות",
+                    "👀 תנועות ראש מפחידות לצדדים",
+                    "🖐️ ידיים עם אצבעות מעוקלות כמו טפרים",
+                    "💀 פרצוף מפחיד - עיניים פעורות, פה פתוח",
+                    "🔄 הסתובבו לאט ופתאום - תנועה חדה!",
+                    "😱 סיום: נפלו על הרצפה דרמטית"
+                ]
+            },
+            {
+                song: "🎵 Shake It Off - Taylor Swift",
+                level: "קל",
+                duration: "3 דקות",
+                desc: "פשוט לנער הכל!",
+                steps: [
+                    "🤷 כתפיים למעלה ולמטה",
+                    "👋 נערו את הידיים בפראות",
+                    "🦵 בעטו ברגליים קדימה",
+                    "💃 סיבובים מהירים",
+                    "🙅 תנועת 'לא אכפת לי' עם הידיים",
+                    "🎉 קפצו וצעקו 'Shake it off!'"
+                ]
+            },
+            {
+                song: "🎵 Gangnam Style - PSY",
+                level: "בינוני",
+                duration: "4 דקות",
+                desc: "הריקוד הויראלי הכי מפורסם!",
+                steps: [
+                    "🐴 תנועת רכיבה על סוס - קפיצות קטנות",
+                    "🤠 יד אחת מסתובבת מעל הראש כמו לאסו",
+                    "👉 הצביעו קדימה בתנופה",
+                    "🦵 רגל מוצלבת ותנועה הצידה",
+                    "😎 הוסיפו משקפי שמש דמיוניים",
+                    "🎤 צעקו 'אופה גנגנם סטייל!'"
+                ]
+            },
+            {
+                song: "🎵 I Will Survive - Gloria Gaynor",
+                level: "קל",
+                duration: "4 דקות",
+                desc: "ריקוד דרמטי ומעצים!",
+                steps: [
+                    "💔 התחילו עצובים - ראש למטה",
+                    "💪 בהדרגה התרוממו והתחזקו",
+                    "👆 הצביעו למעלה בגאווה",
+                    "🚶 צעדו בביטחון קדימה",
+                    "🙅 תנועת 'לא!' דרמטית",
+                    "👑 סיום: עמדו גבוה עם ידיים פרושות"
+                ]
+            },
+            {
+                song: "🎵 Cha Cha Slide - DJ Casper",
+                level: "קל מאוד",
+                duration: "4 דקות",
+                desc: "פשוט עקבו אחרי ההוראות בשיר!",
+                steps: [
+                    "👈 Slide to the left - החליקו שמאלה",
+                    "👉 Slide to the right - החליקו ימינה",
+                    "↩️ Criss cross - צעד מוצלב",
+                    "👏 Cha cha real smooth - צעדי צ'ה צ'ה",
+                    "🔙 Take it back now - צעדו אחורה",
+                    "👐 Everybody clap your hands - מחאו כפיים!"
+                ]
+            },
+            {
+                song: "🎵 Dancing Queen - ABBA",
+                level: "קל",
+                duration: "4 דקות",
+                desc: "הרגישו כמו מלכות ומלכים!",
+                steps: [
+                    "👑 שימו כתר דמיוני על הראש",
+                    "💃 הסתובבו כמו בנשף",
+                    "👗 החזיקו שמלה דמיונית והניפו",
+                    "🎵 תנועות גלים עם הידיים",
+                    "🤝 רקדו יחד כמו בואלס",
+                    "✨ סיום: הרימו את הידיים והבריקו!"
+                ]
+            }
+        ];
+
+        const dateIdeas = [
+            // רומנטי
+            {cat:"romantic", title:"🌅 דייט שקיעה", desc:"מצאו נקודת תצפית יפה, קחו שמיכה וחטיפים, וצפו בשקיעה יחד.", details:"<b>מה להביא:</b><br>• שמיכה רכה<br>• יין/מיץ ענבים וכוסות<br>• גבינות, קרקרים, ענבים<br>• שוקולד<br>• רמקול קטן<br><br><b>טיפים:</b><br>• בדקו שעת שקיעה מראש<br>• הגיעו 30 דקות לפני<br>• צלמו את הרגע<br>• הישארו גם לכוכבים הראשונים"},
+            {cat:"romantic", title:"👨‍🍳 בישול עיוור", desc:"כל אחד מכין מנה בסוד - ארוחת הפתעות!", details:"<b>איך עושים:</b><br>1. כל אחד בוחר מנה בסוד<br>2. קונים מצרכים בנפרד<br>3. מבשלים במשמרות<br>4. ארוחה חגיגית יחד!<br><br><b>רעיונות למנות:</b><br>• פסטה ברוטב שמנת<br>• סלמון בתנור עם ירקות<br>• ריזוטו פטריות<br>• עוף בלימון ועשבי תיבול"},
+            {cat:"romantic", title:"💌 ציד מכתבים", desc:"להחביא מכתבי אהבה ברחבי הבית - השני צריך למצוא.", details:"<b>איך מכינים:</b><br>1. כתבו 5-10 מכתבים קצרים<br>2. בכל אחד רמז למיקום הבא<br>3. המכתב האחרון - הפתעה!<br><br><b>רעיונות למיקומים:</b><br>• בתוך הנעל<br>• מתחת לכרית<br>• במקרר<br>• בכיס המעיל<br><br><b>ההפתעה בסוף:</b><br>מתנה קטנה או דייט מתוכנן"},
+            {cat:"romantic", title:"⭐ צפייה בכוכבים", desc:"שמיכה, חטיפים, ולצפות בכוכבים. אפליקציית כוכבים מומלצת!", details:"<b>הכנה:</b><br>• הורידו אפליקציית Star Walk<br>• בדקו תחזית מזג אוויר<br>• מצאו מקום רחוק מאורות<br><br><b>מה להביא:</b><br>• שמיכות<br>• כריות<br>• תרמוס שוקו חם<br>• חטיפים<br><br><b>לחפש בשמיים:</b><br>• הדובה הגדולה<br>• כוכב הצפון<br>• חגורת אוריון"},
+            {cat:"romantic", title:"🛁 ערב ספא", desc:"אמבטיה עם נרות, מסכות פנים, עיסויים ומוזיקה רגועה.", details:"<b>להכין מראש:</b><br>• נרות ריחניים<br>• מסכות פנים<br>• שמן עיסוי<br>• מגבות רכות<br><br><b>מתכון למסכה:</b><br>חצי אבוקדו + כף דבש + כף יוגורט<br>להשאיר 15 דקות<br><br><b>סדר הערב:</b><br>1. אמבטיה חמה<br>2. מסכות פנים<br>3. עיסוי הדדי<br>4. תה ופירות"},
+            {cat:"romantic", title:"🎨 ציור זוגי", desc:"לקנות קנבס וצבעים ולצייר יחד.", details:"<b>מה לקנות:</b><br>• קנבס 40x50<br>• צבעי אקריליק<br>• מכחולים<br>• פלטת ערבוב<br><br><b>רעיונות לציור:</b><br>• כל אחד צד של הקנבס<br>• לצייר זה את זה<br>• נוף משותף<br><br><b>טיפ:</b> שימו מוזיקה ויין!"},
+            // הרפתקה
+            {cat:"adventure", title:"🎲 יום של 'כן'", desc:"כל אחד מציע 3 דברים - והשני חייב להסכים!", details:"<b>הכללים:</b><br>• כל אחד 3 פעילויות<br>• אסור לסרב!<br>• הצעות הגיוניות<br><br><b>רעיונות:</b><br>• לאכול משהו חדש<br>• לשיר בקריוקי<br>• ללכת למקום חדש<br>• לכתוב שיר יחד"},
+            {cat:"adventure", title:"🗺️ הרפתקה אקראית", desc:"להטיל קובייה ולנסוע לאן שיוצא!", details:"<b>איך עושים:</b><br>1. כתבו 6 יעדים<br>2. הטילו קובייה<br>3. נוסעים לאן שיצא!<br><br><b>אופציה:</b><br>• פתחו מפה<br>• עצמו עיניים<br>• הצביעו באקראי<br><br><b>טיפ:</b> קחו מצלמה!"},
+            {cat:"adventure", title:"📸 תיירים בעיר", desc:"לטייל בעיר שלכם כאילו תיירים.", details:"<b>להתנהג כתיירים:</b><br>• לצלם הכל<br>• להיכנס למוזיאונים<br>• לאכול במסעדה חדשה<br><br><b>משימות:</b><br>• 20 תמונות זוגיות<br>• 3 מקומות חדשים<br>• מזכרת קטנה"},
+            {cat:"adventure", title:"🥾 טיול הפתעה", desc:"אחד מתכנן בסוד - השני לא יודע לאן!", details:"<b>למתכנן:</b><br>• מסלול קל-בינוני<br>• הכן אוכל ושתייה<br>• בדוק מזג אוויר<br>• הפתעה בסוף<br><br><b>למופתע:</b><br>• לבוש נוח<br>• נעליים סגורות<br>• גישה פתוחה!"},
+            {cat:"adventure", title:"🚗 נסיעה בלי יעד", desc:"להיכנס לאוטו ופשוט לנסוע.", details:"<b>הכללים:</b><br>• אין יעד מוגדר<br>• בכל צומת - מחליטים<br>• עוצרים במקומות מעניינים<br><br><b>מה לקחת:</b><br>• חטיפים<br>• פלייליסט<br>• מצלמה<br><br><b>טיפ:</b> צאו עם המון זמן"},
+            {cat:"adventure", title:"🎪 משהו חדש", desc:"לעשות משהו ששניכם מעולם לא עשיתם!", details:"<b>רעיונות:</b><br>• טיפוס קיר<br>• שיעור קרמיקה<br>• סדנת בישול<br>• יוגה זוגית<br>• רכיבה על סוסים<br>• שיעור ריקוד<br><br><b>למה זה טוב:</b><br>חוויות חדשות מחזקות!"},
+            // בבית
+            {cat:"home", title:"🎮 ערב משחקים", desc:"משחקי קופסא, קלפים, או וידאו!", details:"<b>משחקים לזוגות:</b><br>• Ticket to Ride<br>• Patchwork<br>• שש-בש<br>• UNO<br><br><b>להוסיף עניין:</b><br>המפסיד מכין ארוחת בוקר!"},
+            {cat:"home", title:"🍿 מרתון סרטים", desc:"סדרת סרטים עם פופקורן וממתקים.", details:"<b>סדרות מומלצות:</b><br>• שר הטבעות<br>• הארי פוטר<br>• Before Trilogy<br><br><b>חטיפים:</b><br>• פופקורן<br>• נאצ'וס<br>• גלידה<br><br><b>טיפ:</b> בנו מבצר!"},
+            {cat:"home", title:"🏕️ קמפינג בסלון", desc:"אוהל או מבצר מסדינים, פנסים, שקי שינה.", details:"<b>איך בונים מבצר:</b><br>1. כסאות כבסיס<br>2. סדינים למעלה<br>3. כריות בפנים<br>4. אורות<br><br><b>פעילויות:</b><br>• סיפורים מפחידים<br>• משחקי קלפים<br>• סרט על לפטופ"},
+            {cat:"home", title:"👨‍🍳 תחרות שפים", desc:"לבחור מרכיב - שניכם מכינים מנה.", details:"<b>איך מתחרים:</b><br>1. בוחרים מרכיב<br>2. 45 דקות להכנה<br>3. טועמים ומדרגים!<br><br><b>קריטריונים:</b><br>• טעם<br>• מראה<br>• יצירתיות<br><br><b>הפרס:</b><br>המנצח לא שוטף כלים!"},
+            {cat:"home", title:"💃 לילה של ריקודים", desc:"פלייליסט ולרקוד בסלון!", details:"<b>פלייליסט:</b><br>• שירים מהחתונה<br>• להיטים ישנים<br>• שירים לטיניים<br><br><b>להוסיף עניין:</b><br>• ללמוד ריקוד מיוטיוב<br>• תחרות Just Dance<br><br><b>טיפ:</b> הזיזו רהיטים!"},
+            {cat:"home", title:"📚 ערב קריאה", desc:"כל אחד קורא בשקט, צמודים על הספה.", details:"<b>ההכנה:</b><br>• לבחור ספרים<br>• תה/קפה<br>• תאורה נעימה<br><br><b>וריאציות:</b><br>• לקרוא בקול לשני<br>• לקרוא אותו ספר<br><br><b>ספרים מומלצים:</b><br>• 5 שפות האהבה"},
+            // כיף
+            {cat:"fun", title:"🎤 קריוקי", desc:"בבית או בבר - לשיר בלי בושה!", details:"<b>לקריוקי בבית:</b><br>• YouTube karaoke<br>• אפליקציית Smule<br><br><b>שירים לדואט:</b><br>• A Whole New World<br>• Shallow<br>• Summer Nights<br><br><b>טיפ:</b> המטרה להנות!"},
+            {cat:"fun", title:"🎯 אתגר צילום", desc:"לבחור 10 דברים לצלם ולמצוא יחד.", details:"<b>רשימה:</b><br>1. משהו אדום<br>2. חיה<br>3. זוג אחר<br>4. אוכל<br>5. שלט מצחיק<br>6. פרח<br>7. סלפי במקום יפה<br><br><b>הכללים:</b><br>• שעתיים זמן<br>• הכי יצירתי מנצח"},
+            {cat:"fun", title:"🧩 חדר בריחה", desc:"לפתור חידות ולגלות איך אתם כצוות.", details:"<b>טיפים:</b><br>• תקשרו כל הזמן<br>• חלקו משימות<br>• בקשו רמזים<br><br><b>אחרי:</b><br>• מה עבד טוב?<br>• מה למדנו?<br><br><b>טיפ:</b> רמת קושי בינונית"},
+            {cat:"fun", title:"🍦 סיור אוכל", desc:"3-4 מקומות, מנה קטנה בכל אחד.", details:"<b>תכנון:</b><br>1. בחרו אזור<br>2. מפו 4-5 מקומות<br>3. מנה קטנה בכל מקום<br><br><b>רעיונות:</b><br>• סיור פיצות<br>• סיור קינוחים<br>• אוכל רחוב<br><br><b>טיפ:</b> הגיעו רעבים!"},
+            {cat:"fun", title:"🛒 קניות בשוק", desc:"לבחור מרכיבים אקראיים ולבשל.", details:"<b>הכללים:</b><br>• תקציב 100₪<br>• כל אחד 3 מרכיבים<br>• לבשל ארוחה<br><br><b>טיפים:</b><br>• לטעום דוגמיות<br>• לקנות משהו חדש<br><br><b>בבית:</b> לחפש מתכון!"},
+            {cat:"fun", title:"🎭 ערב קומדיה", desc:"מופע סטנדאפ או מרתון קומדיה.", details:"<b>אפשרויות:</b><br>• מופע חי<br>• Netflix Comedy<br><br><b>קומיקאים:</b><br>• שחר חסון<br>• גורי אלפי<br>• Kevin Hart<br><br><b>להוסיף:</b> פיצה ובירה!"},
+            {cat:"fun", title:"🔮 ערב משחקי חברה", desc:"להזמין זוג חברים - דייט כפול!", details:"<b>משחקים לארבעה:</b><br>• קודנים<br>• Dixit<br>• טאבו<br>• טריוויה<br><br><b>להכין:</b><br>• חטיפים<br>• שתייה<br>• פרסים קטנים"},
+            {cat:"fun", title:"📝 כתיבת סיפור יחד", desc:"להתחיל סיפור וכל אחד ממשיך.", details:"<b>איך עושים:</b><br>1. פסקה פותחת<br>2. השני ממשיך<br>3. וחוזר חלילה!<br><br><b>כללים:</b><br>• 3-5 משפטים בפסקה<br>• אסור למחוק<br><br><b>פתיחות:</b><br>• 'באותו לילה חורפי...'"}
+        ];
+
+        // ========== STATE ==========
+        let state = {
+            currentDay: 1,
+            completed: [],
+            points: 0,
+            streak: 0,
+            notes: [],
+            customChallenges: [],
+            customDates: [],
+            ideas: [],
+            journals: [],
+            completedChallenges: 0,
+            commNotes: []
+        };
+
+        // ========== DELETE FUNCTIONS WITH EVENT LISTENER ==========
+        document.addEventListener('click', function(e) {
+            var target = e.target;
+            
+            // Complete Mission
+            if (target.hasAttribute('data-complete-mission')) {
+                if (!state.completed.includes(state.currentDay)) {
+                    state.completed.push(state.currentDay);
+                    state.points += 10;
+                    state.streak++;
+                    if (state.currentDay < 100) state.currentDay++;
+                    localStorage.setItem('100days', JSON.stringify(state));
+                    updateUI();
+                    target.textContent = '🎉 כל הכבוד!';
+                    target.classList.add('completed');
+                    setTimeout(function() {
+                        target.textContent = '✓ השלמתי את המשימה';
+                        target.classList.remove('completed');
+                    }, 2000);
+                }
+            }
+            
+            // Complete Daily Challenge
+            if (target.hasAttribute('data-complete-daily')) {
+                state.points += 20;
+                state.completedChallenges++;
+                localStorage.setItem('100days', JSON.stringify(state));
+                updateUI();
+                target.textContent = '🎉 מדהים!';
+                target.classList.add('completed');
+                setTimeout(function() {
+                    target.textContent = '✓ השלמתי!';
+                    target.classList.remove('completed');
+                }, 2000);
+            }
+            
+            // Complete Weekly Challenge
+            if (target.hasAttribute('data-complete-weekly')) {
+                state.points += 50;
+                state.completedChallenges++;
+                localStorage.setItem('100days', JSON.stringify(state));
+                updateUI();
+                target.textContent = '🎉 וואו!';
+                target.classList.add('completed');
+                setTimeout(function() {
+                    target.textContent = '✓ השלמתי! (+50 נקודות)';
+                    target.classList.remove('completed');
+                }, 2000);
+            }
+            
+            // Close Comm Modal
+            if (target.hasAttribute('data-close-comm')) {
+                closeModal('commModal');
+            }
+            
+            // Save Communication Note
+            if (target.hasAttribute('data-save-comm')) {
+                var s1 = document.getElementById('commStep1').value.trim();
+                var s2 = document.getElementById('commStep2').value.trim();
+                var s3 = document.getElementById('commStep3').value.trim();
+                var s4 = document.getElementById('commStep4').value.trim();
+                if (s1 || s2 || s3 || s4) {
+                    if (!state.commNotes) state.commNotes = [];
+                    state.commNotes.push({
+                        step1: s1, step2: s2, step3: s3, step4: s4,
+                        date: new Date().toLocaleDateString('he-IL')
+                    });
+                    localStorage.setItem('100days', JSON.stringify(state));
+                    document.getElementById('commStep1').value = '';
+                    document.getElementById('commStep2').value = '';
+                    document.getElementById('commStep3').value = '';
+                    document.getElementById('commStep4').value = '';
+                    renderCommNotes();
+                    alert('נשמר! 💕');
+                }
+            }
+            
+            // Share Communication in WhatsApp
+            if (target.hasAttribute('data-share-comm')) {
+                var s1 = document.getElementById('commStep1').value.trim();
+                var s2 = document.getElementById('commStep2').value.trim();
+                var s3 = document.getElementById('commStep3').value.trim();
+                var s4 = document.getElementById('commStep4').value.trim();
+                var msg = '💬 תקשורת מקרבת:\n\n';
+                if (s1) msg += '1️⃣ תצפית: ' + s1 + '\n';
+                if (s2) msg += '2️⃣ רגש: ' + s2 + '\n';
+                if (s3) msg += '3️⃣ צורך: ' + s3 + '\n';
+                if (s4) msg += '4️⃣ בקשה: ' + s4 + '\n';
+                if (s1 || s2 || s3 || s4) {
+                    window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+                } else {
+                    alert('כתבו לפחות שלב אחד לפני השיתוף');
+                }
+            }
+            
+            // Delete Communication Note
+            if (target.hasAttribute('data-delete-comm')) {
+                var index = parseInt(target.getAttribute('data-delete-comm'));
+                state.commNotes.splice(index, 1);
+                localStorage.setItem('100days', JSON.stringify(state));
+                renderCommNotes();
+            }
+            
+            // Delete Journal
+            if (target.hasAttribute('data-delete-journal')) {
+                var index = parseInt(target.getAttribute('data-delete-journal'));
+                state.journals.splice(index, 1);
+                localStorage.setItem('100days', JSON.stringify(state));
+                renderJournals();
+            }
+            
+            // Delete Note
+            if (target.hasAttribute('data-delete-note')) {
+                var index = parseInt(target.getAttribute('data-delete-note'));
+                state.notes.splice(index, 1);
+                localStorage.setItem('100days', JSON.stringify(state));
+                renderNotes();
+                updateUI();
+            }
+            
+            // Delete Challenge
+            if (target.hasAttribute('data-delete-challenge')) {
+                var index = parseInt(target.getAttribute('data-delete-challenge'));
+                state.customChallenges.splice(index, 1);
+                localStorage.setItem('100days', JSON.stringify(state));
+                renderCustomChallenges();
+            }
+            
+            // Delete Date
+            if (target.hasAttribute('data-delete-date')) {
+                var index = parseInt(target.getAttribute('data-delete-date'));
+                state.customDates.splice(index, 1);
+                localStorage.setItem('100days', JSON.stringify(state));
+                renderCustomDates();
+            }
+            
+            // Delete Idea
+            if (target.hasAttribute('data-delete-idea')) {
+                var index = parseInt(target.getAttribute('data-delete-idea'));
+                state.ideas.splice(index, 1);
+                localStorage.setItem('100days', JSON.stringify(state));
+                renderIdeas();
+            }
+        });
+
+        // ========== COLLAPSIBLE SECTIONS ==========
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const icon = document.getElementById(sectionId + 'Icon');
+            section.classList.toggle('show');
+            icon.classList.toggle('open');
+        }
+
+        // ========== INIT ==========
+        function init() {
+            loadState();
+            createHearts();
+            updateUI();
+            renderMessages('morning');
+            renderNotes();
+            renderChallenges();
+            renderMovies();
+            renderDates();
+            renderDances();
+            setJournalDate();
+            renderJournals();
+            renderCommNotes();
+        }
+
+        function loadState() {
+            const saved = localStorage.getItem('100days');
+            if (saved) state = {...state, ...JSON.parse(saved)};
+        }
+
+        function saveState() {
+            localStorage.setItem('100days', JSON.stringify(state));
+        }
+
+        function createHearts() {
+            const bg = document.getElementById('heartsBg');
+            const hearts = ['💕','💗','💖','💝','❤️'];
+            for (let i = 0; i < 12; i++) {
+                const h = document.createElement('div');
+                h.className = 'floating-heart';
+                h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+                h.style.left = Math.random()*100 + '%';
+                h.style.animationDelay = Math.random()*15 + 's';
+                h.style.fontSize = (15 + Math.random()*15) + 'px';
+                bg.appendChild(h);
+            }
+        }
+
+        // ========== UI ==========
+        function updateUI() {
+            document.getElementById('missionDay').textContent = state.currentDay;
+            document.getElementById('streakDays').textContent = state.streak;
+            document.getElementById('notesSent').textContent = state.notes.length;
+            document.getElementById('dayInput').value = state.currentDay;
+
+            const m = missions[(state.currentDay-1) % missions.length];
+            document.getElementById('missionContent').textContent = m.mission;
+            document.getElementById('missionTip').innerHTML = '💡 <strong>טיפ:</strong> ' + m.tip;
+
+            const q = questions[(state.currentDay-1) % questions.length];
+            document.getElementById('dailyQuestion').textContent = q;
+
+            const s = smileTasks[(state.currentDay-1) % smileTasks.length];
+            document.getElementById('smileTask').textContent = s;
+
+            const btn = document.getElementById('completeBtn');
+            if (state.completed.includes(state.currentDay)) {
+                btn.classList.add('completed');
+                btn.textContent = '✓ המשימה הושלמה!';
+            } else {
+                btn.classList.remove('completed');
+                btn.textContent = '✓ השלמתי את המשימה';
+            }
+        }
+
+        function setJournalDate() {
+            const d = new Date();
+            document.getElementById('journalDate').textContent = d.toLocaleDateString('he-IL', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+        }
+
+        function showTab(id) {
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById(id).classList.add('active');
+        }
+
+        function goHome() {
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.querySelector('.nav-tab').classList.add('active');
+            document.getElementById('today').classList.add('active');
+        }
+
+        // ========== MISSIONS ==========
+        function completeMission() {
+            if (state.completed.includes(state.currentDay)) return;
+            state.completed.push(state.currentDay);
+            state.points += 10;
+            state.streak++;
+            saveState();
+            updateUI();
+            showModal('missionModal');
+        }
+
+        // ========== MESSAGES ==========
+        function selectTime(time) {
+            document.querySelectorAll('.message-time-card').forEach(c => c.classList.remove('active'));
+            event.target.closest('.message-time-card').classList.add('active');
+            renderMessages(time);
+        }
+
+        function renderMessages(time) {
+            const cont = document.getElementById('messageSuggestions');
+            cont.innerHTML = msgData[time].map(m => 
+                `<div class="message-suggestion" style="display:flex;justify-content:space-between;align-items:center;">
+                    <span onclick="copyText('${m.replace(/'/g,"\\'")}')" style="flex:1;cursor:pointer">${m}</span>
+                    <button onclick="shareMessageWhatsApp('${m.replace(/'/g,"\\'")}')" style="background:#25D366;border:none;color:white;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:0.85em;">💬</button>
+                </div>`
+            ).join('');
+        }
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text);
+            const toast = document.getElementById('copyToast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        function copyCustomMessage() {
+            const t = document.getElementById('customMessage').value;
+            if (t) copyText(t);
+        }
+
+        function shareWhatsApp() {
+            const t = document.getElementById('customMessage').value;
+            if (t) {
+                const url = 'https://wa.me/?text=' + encodeURIComponent(t);
+                window.open(url, '_blank');
+            } else {
+                alert('כתבו הודעה קודם! 💕');
+            }
+        }
+
+        function shareMessageWhatsApp(text) {
+            const url = 'https://wa.me/?text=' + encodeURIComponent(text);
+            window.open(url, '_blank');
+        }
+
+        // ========== NOTES ==========
+        function renderNotes() {
+            // Suggestions
+            document.getElementById('noteSuggestions').innerHTML = noteSugg.map(n =>
+                `<div class="note-card" onclick="copyText('${n.replace(/'/g,"\\'")}')">${n}<div class="note-meta">לחצו להעתקה 📋</div></div>`
+            ).join('');
+
+            // My notes
+            const cont = document.getElementById('myNotes');
+            if (state.notes.length === 0) {
+                cont.innerHTML = '<p style="color:var(--gray);text-align:center;">עדיין לא כתבתם פתקים</p>';
+            } else {
+                cont.innerHTML = state.notes.map((n, index) =>
+                    `<div class="note-card"><div class="note-text">${n.text}</div><div class="note-meta"><span>${n.date}</span><button data-delete-note="${index}" style="background:none;border:none;font-size:1.3em;cursor:pointer;color:#EF5350;padding:5px 10px;">✕</button></div></div>`
+                ).join('');
+            }
+        }
+
+        function addNote() {
+            const t = document.getElementById('newNoteText').value.trim();
+            if (!t) return;
+            state.notes.push({text: t, date: new Date().toLocaleDateString('he-IL')});
+            saveState();
+            document.getElementById('newNoteText').value = '';
+            renderNotes();
+            updateUI();
+        }
+
+        // ========== CHALLENGES ==========
+        function renderChallenges() {
+            const di = (state.currentDay-1) % dailyChallenges.length;
+            const dc = dailyChallenges[di];
+            document.getElementById('dailyChallenge').innerHTML = `
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <span class="challenge-badge">יומי</span>
+                        <span class="challenge-badge" style="background:#E8EAF6;color:#3F51B5">${dc.cat}</span>
+                    </div>
+                    <div class="challenge-title">${dc.title}</div>
+                    <div class="challenge-desc">${dc.desc}</div>
+                    <button class="complete-btn" style="margin-top:15px" data-complete-daily>✓ השלמתי!</button>
+                </div>`;
+
+            const wi = Math.floor((state.currentDay-1)/7) % weeklyChallenges.length;
+            const wc = weeklyChallenges[wi];
+            document.getElementById('weeklyChallenge').innerHTML = `
+                <div class="challenge-card" style="border-right-color:var(--gold)">
+                    <div class="challenge-header">
+                        <span class="challenge-badge weekly">שבוע ${wc.week}</span>
+                    </div>
+                    <div class="challenge-title">${wc.title}</div>
+                    <div class="challenge-desc">${wc.desc}</div>
+                    <button class="complete-btn" style="margin-top:15px;background:var(--gold)" data-complete-weekly>✓ השלמתי! (+50 נקודות)</button>
+                </div>`;
+
+            document.getElementById('tiktokChallenges').innerHTML = tiktokCh.map(c => `
+                <div class="challenge-card" style="border-right-color:var(--pink)">
+                    <div class="challenge-header">
+                        <span class="challenge-badge tiktok">🔥 טיקטוק</span>
+                        ${c.popular ? '<span style="color:var(--gold)">⭐ פופולרי</span>' : ''}
+                    </div>
+                    <div class="challenge-title">${c.title}</div>
+                    <div class="challenge-desc">${c.desc}</div>
+                </div>`).join('');
+
+            renderCustomChallenges();
+            renderBadges();
+        }
+
+        function completeChallenge(type) {
+            if (type === 'daily') {
+                state.points += 10;
+                state.completedChallenges = (state.completedChallenges || 0) + 1;
+            } else if (type === 'weekly') {
+                state.points += 50;
+                state.completedChallenges = (state.completedChallenges || 0) + 1;
+            }
+            saveState();
+            updateUI();
+            renderBadges();
+            alert('🎉 כל הכבוד! +' + (type === 'daily' ? '10' : '50') + ' נקודות!');
+        }
+
+        function renderBadges() {
+            const completed = state.completedChallenges || 0;
+            let currentBadge = null;
+            let nextBadge = badges[0];
+            
+            for (let i = 0; i < badges.length; i++) {
+                if (completed >= badges[i].required) {
+                    currentBadge = badges[i];
+                    nextBadge = badges[i+1] || null;
+                }
+            }
+
+            const badgeHtml = `
+                <div class="card" style="background:var(--peach);margin-top:20px;">
+                    <div style="text-align:center">
+                        <div style="font-size:2em;margin-bottom:10px">${currentBadge ? currentBadge.name : '🎯'}</div>
+                        <div style="font-weight:600;margin-bottom:5px">${completed} אתגרים הושלמו</div>
+                        ${nextBadge ? `<div style="color:var(--text);font-size:0.9em">עוד ${nextBadge.required - completed} אתגרים ל${nextBadge.name}</div>` : '<div style="color:var(--pink-dark)">השגת את כל התגים! 🏆</div>'}
+                    </div>
+                </div>`;
+            
+            const container = document.getElementById('badgesContainer');
+            if (container) container.innerHTML = badgeHtml;
+        }
+
+        function addCustomChallenge() {
+            const t = document.getElementById('customChallengeText').value.trim();
+            if (!t) return;
+            state.customChallenges.push({text: t});
+            saveState();
+            document.getElementById('customChallengeText').value = '';
+            renderCustomChallenges();
+        }
+
+        function renderCustomChallenges() {
+            const cont = document.getElementById('customChallenges');
+            if (state.customChallenges.length === 0) {
+                cont.innerHTML = '<p style="color:var(--gray);text-align:center;">עדיין לא הוספתם אתגרים</p>';
+            } else {
+                cont.innerHTML = state.customChallenges.map((c, index) => `
+                    <div class="challenge-card">
+                        <div class="challenge-header">
+                            <span class="challenge-badge" style="background:var(--mint-light);color:var(--mint-dark)">שלנו ✨</span>
+                            <button data-delete-challenge="${index}" style="background:none;border:none;font-size:1.3em;cursor:pointer;color:#EF5350;padding:5px 10px;">✕</button>
+                        </div>
+                        <div class="challenge-desc">${c.text}</div>
+                    </div>`).join('');
+            }
+        }
+
+        // ========== MOVIES ==========
+        function renderMovies() {
+            const wi = Math.floor((state.currentDay-1)/7) % movies.length;
+            const m = movies[wi];
+            
+            document.getElementById('currentMovie').innerHTML = `
+                <div class="movie-card">
+                    <div class="movie-week">🎬 שבוע ${wi+1} מתוך ${movies.length}</div>
+                    <div class="movie-title">${m.title}</div>
+                    <div class="movie-why">${m.why}</div>
+                    <div class="movie-task">
+                        <div class="movie-task-label">משימה אחרי הסרט:</div>
+                        ${m.task}
+                    </div>
+                </div>`;
+
+            document.getElementById('movieQuestions').innerHTML = `
+                <h3 style="margin-bottom:15px">🎬 שאלות לדיון אחרי הסרט:</h3>
+                ${m.questions.map(q => `<div class="question-item">${q}</div>`).join('')}`;
+
+            document.getElementById('moviesList').innerHTML = movies.map((mv, i) => `
+                <div class="card" style="opacity:${i<=wi?1:0.5};cursor:pointer;" onclick="showMovieDetails(${i})">
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div>
+                            <strong>שבוע ${i+1}:</strong> ${mv.title}
+                        </div>
+                        <div>
+                            ${i<wi ? '<span style="color:var(--mint-dark)">✓ נצפה</span>' : ''}
+                            ${i===wi ? '<span style="color:var(--pink-dark)">▶ עכשיו</span>' : ''}
+                            ${i>wi ? '<span style="color:var(--gray)">🔒</span>' : ''}
+                        </div>
+                    </div>
+                </div>`).join('');
+        }
+
+        function showMovieDetails(index) {
+            const m = movies[index];
+            const wi = Math.floor((state.currentDay-1)/7) % movies.length;
+            if (index > wi) {
+                alert('הסרט הזה עדיין נעול! 🔒\nהמשיכו במסע כדי לפתוח אותו.');
+                return;
+            }
+            document.getElementById('movieDetailContent').innerHTML = `
+                <div style="text-align:center;margin-bottom:20px;">
+                    <span style="background:var(--pink);padding:5px 15px;border-radius:20px;font-size:0.85em;">שבוע ${index+1}</span>
+                </div>
+                <h2 style="font-family:'Secular One',sans-serif;color:var(--pink-dark);margin-bottom:10px;">${m.title}</h2>
+                <p style="color:var(--gray);margin-bottom:20px;">${m.why}</p>
+                <div style="background:var(--peach);border-radius:15px;padding:15px;margin-bottom:20px;">
+                    <b>משימה אחרי הסרט:</b><br>${m.task}
+                </div>
+                <div style="background:var(--gray-light);border-radius:15px;padding:15px;">
+                    <b>שאלות לדיון:</b><br>
+                    ${m.questions.map(q => `• ${q}`).join('<br>')}
+                </div>
+            `;
+            showModal('movieDetailModal');
+        }
+
+        // ========== DATES ==========
+        function renderDates() {
+            const catNames = {romantic:'רומנטי', adventure:'הרפתקה', home:'בבית', fun:'כיף'};
+            document.getElementById('dateIdeas').innerHTML = dateIdeas.map((d, i) => `
+                <div class="date-idea-card" onclick="showDateDetails(${i})">
+                    <span class="date-idea-category ${d.cat}">${catNames[d.cat]}</span>
+                    <div class="date-idea-title">${d.title}</div>
+                    <div class="date-idea-desc">${d.desc}</div>
+                    <div style="color:var(--pink-dark);font-size:0.85em;margin-top:10px;">לחצו לפרטים מלאים ←</div>
+                </div>`).join('');
+            
+            renderCustomDates();
+        }
+
+        function renderDances() {
+            const levelColors = {'קל מאוד':'var(--mint)','קל':'var(--mint-light)','בינוני':'var(--peach)'};
+            document.getElementById('danceList').innerHTML = dances.map((d, i) => `
+                <div class="card" style="margin-bottom:15px;cursor:pointer;" onclick="showDanceDetails(${i})">
+                    <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:10px;">
+                        <div style="font-weight:600;font-size:1.1em;">${d.song}</div>
+                        <span style="background:${levelColors[d.level]};padding:3px 10px;border-radius:10px;font-size:0.8em;">${d.level}</span>
+                    </div>
+                    <div style="color:var(--gray);font-size:0.9em;margin-bottom:5px;">${d.desc}</div>
+                    <div style="color:var(--pink-dark);font-size:0.85em;">⏱️ ${d.duration} | לחצו לצפייה בצעדים ←</div>
+                </div>`).join('');
+        }
+
+        function showDanceDetails(index) {
+            const d = dances[index];
+            const levelColors = {'קל מאוד':'var(--mint)','קל':'var(--mint-light)','בינוני':'var(--peach)'};
+            document.getElementById('danceDetailContent').innerHTML = `
+                <div style="text-align:center;margin-bottom:20px;">
+                    <span style="background:${levelColors[d.level]};padding:5px 15px;border-radius:20px;font-size:0.85em;">${d.level} | ${d.duration}</span>
+                </div>
+                <h2 style="font-family:'Secular One',sans-serif;color:var(--pink-dark);margin-bottom:10px;text-align:center;">${d.song}</h2>
+                <p style="color:var(--gray);margin-bottom:20px;text-align:center;">${d.desc}</p>
+                <div style="background:var(--gray-light);border-radius:15px;padding:20px;">
+                    <h3 style="margin-bottom:15px;color:var(--text);">🎬 הצעדים:</h3>
+                    ${d.steps.map((step, i) => `<div style="padding:10px 0;border-bottom:1px solid var(--pink-light);"><b>${i+1}.</b> ${step}</div>`).join('')}
+                </div>
+                <div style="text-align:center;margin-top:20px;padding:15px;background:var(--lavender);border-radius:15px;">
+                    <div style="font-size:1.5em;margin-bottom:10px;">🎵</div>
+                    <div style="color:var(--gray);">חפשו את השיר ביוטיוב והתחילו לרקוד!</div>
+                </div>
+            `;
+            showModal('danceDetailModal');
+        }
+
+        function showDateDetails(index) {
+            const d = dateIdeas[index];
+            const catNames = {romantic:'רומנטי', adventure:'הרפתקה', home:'בבית', fun:'כיף'};
+            document.getElementById('dateDetailContent').innerHTML = `
+                <span class="date-idea-category ${d.cat}">${catNames[d.cat]}</span>
+                <h2 style="margin:15px 0;font-family:'Secular One',sans-serif;color:var(--pink-dark)">${d.title}</h2>
+                <p style="margin-bottom:20px;color:var(--gray)">${d.desc}</p>
+                <div style="background:var(--gray-light);border-radius:15px;padding:20px;line-height:1.8">${d.details}</div>
+            `;
+            showModal('dateDetailModal');
+        }
+
+        function addCustomDate() {
+            const t = document.getElementById('customDateTitle').value.trim();
+            const d = document.getElementById('customDateDesc').value.trim();
+            if (!t) return;
+            state.customDates.push({title: t, desc: d});
+            saveState();
+            document.getElementById('customDateTitle').value = '';
+            document.getElementById('customDateDesc').value = '';
+            renderCustomDates();
+        }
+
+        function renderCustomDates() {
+            const cont = document.getElementById('customDates');
+            if (state.customDates.length === 0) {
+                cont.innerHTML = '<p style="color:var(--gray);text-align:center;">עדיין לא הוספתם רעיונות</p>';
+            } else {
+                cont.innerHTML = state.customDates.map((d, index) => `
+                    <div class="date-idea-card">
+                        <div style="display:flex;justify-content:space-between;align-items:start;">
+                            <div style="flex:1">
+                                <span class="date-idea-category home">שלנו ✨</span>
+                                <div class="date-idea-title">${d.title}</div>
+                                <div class="date-idea-desc">${d.desc}</div>
+                            </div>
+                            <button data-delete-date="${index}" style="background:none;border:none;font-size:1.3em;cursor:pointer;color:#EF5350;padding:5px 10px;">✕</button>
+                        </div>
+                    </div>`).join('');
+            }
+        }
+
+        // ========== JOURNAL ==========
+        function saveJournal() {
+            const t = document.getElementById('journalEntry').value.trim();
+            if (!t) return;
+            state.journals.push({day: state.currentDay, text: t, date: new Date().toLocaleDateString('he-IL')});
+            saveState();
+            document.getElementById('journalEntry').value = '';
+            renderJournals();
+            alert('נשמר! 💕');
+        }
+
+        function renderJournals() {
+            const cont = document.getElementById('savedJournals');
+            if (state.journals.length === 0) {
+                cont.innerHTML = '';
+            } else {
+                cont.innerHTML = '<h3 style="margin: 20px 0 15px; font-weight: 600;">📝 מה שגיליתי:</h3>' + 
+                    state.journals.map((j, index) => `
+                    <div style="display:flex;justify-content:space-between;align-items:center;padding:15px;background:var(--peach);border-radius:15px;margin-bottom:10px;">
+                        <div style="flex:1">
+                            <div style="font-size:0.85em;color:var(--gray);margin-bottom:8px;">יום ${j.day} | ${j.date}</div>
+                            <div>${j.text}</div>
+                        </div>
+                        <button data-delete-journal="${index}" style="background:none;border:none;font-size:1.3em;cursor:pointer;color:#EF5350;padding:5px 10px;">✕</button>
+                    </div>`).join('');
+            }
+        }
+
+        function renderCommNotes() {
+            if (!state.commNotes) state.commNotes = [];
+            const cont = document.getElementById('savedCommNotes');
+            if (state.commNotes.length === 0) {
+                cont.innerHTML = '';
+            } else {
+                cont.innerHTML = '<h3 style="margin: 10px 0; font-weight: 600;">📝 השיחות שלי:</h3>' + 
+                    state.commNotes.map((c, index) => `
+                    <div style="background:var(--gray-light);border-radius:15px;padding:15px;margin-bottom:10px;position:relative;">
+                        <button data-delete-comm="${index}" style="position:absolute;top:10px;left:10px;background:none;border:none;font-size:1.3em;cursor:pointer;color:#EF5350;">✕</button>
+                        <div style="font-size:0.8em;color:var(--gray);margin-bottom:10px;">${c.date}</div>
+                        ${c.step1 ? '<div style="margin-bottom:5px;"><b>תצפית:</b> ' + c.step1 + '</div>' : ''}
+                        ${c.step2 ? '<div style="margin-bottom:5px;"><b>רגש:</b> ' + c.step2 + '</div>' : ''}
+                        ${c.step3 ? '<div style="margin-bottom:5px;"><b>צורך:</b> ' + c.step3 + '</div>' : ''}
+                        ${c.step4 ? '<div><b>בקשה:</b> ' + c.step4 + '</div>' : ''}
+                    </div>`).join('');
+            }
+        }
+
+        // ========== IDEAS ==========
+        function addIdea() {
+            const t = document.getElementById('newIdea').value.trim();
+            if (!t) return;
+            state.ideas.push({text: t, done: false});
+            saveState();
+            document.getElementById('newIdea').value = '';
+            renderIdeas();
+        }
+
+        function renderIdeas() {
+            const cont = document.getElementById('ideasList');
+            if (state.ideas.length === 0) {
+                cont.innerHTML = '<p style="color:var(--gray);text-align:center;">אין עדיין רעיונות</p>';
+            } else {
+                cont.innerHTML = state.ideas.map((item, index) => `
+                    <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--gray-light);border-radius:10px;margin-bottom:8px;">
+                        <span style="flex:1;${item.done?'text-decoration:line-through;opacity:0.5':''}">${item.text}</span>
+                        <button data-delete-idea="${index}" style="background:none;border:none;font-size:1.3em;cursor:pointer;color:#EF5350;padding:5px 10px;">✕</button>
+                    </div>`).join('');
+            }
+        }
+
+        // ========== MODALS ==========
+        function showModal(id) {
+            document.getElementById(id).classList.add('show');
+            if (id === 'ideasModal') renderIdeas();
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('show');
+        }
+
+        function updateDay() {
+            const d = parseInt(document.getElementById('dayInput').value);
+            if (d >= 1 && d <= 100) {
+                state.currentDay = d;
+                saveState();
+                updateUI();
+                renderChallenges();
+                renderMovies();
+                closeModal('settingsModal');
+            }
+        }
+
+        function resetAll() {
+            if (confirm('למחוק את כל ההתקדמות?')) {
+                state = {currentDay:1, completed:[], points:0, streak:0, notes:[], customChallenges:[], customDates:[], ideas:[], journals:[], completedChallenges:0};
+                saveState();
+                updateUI();
+                renderNotes();
+                renderChallenges();
+                renderMovies();
+                renderDates();
+                closeModal('settingsModal');
+            }
+        }
+
+        // Close modals on outside click
+        document.querySelectorAll('.modal-overlay').forEach(m => {
+            m.onclick = e => { if (e.target === m) m.classList.remove('show'); };
+        });
+
+        // Start
+        init();
+    </script>
+</body>
+</html>
